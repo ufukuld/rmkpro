@@ -6,7 +6,7 @@ services:
     # volumes:
     #   - ~/volumes/jhipster/rmkpro/mysql/:/var/lib/mysql/
     environment:
-      - MYSQL_ALLOW_EMPTY_PASSWORD=yes
+      - MYSQL_ALLOW_EMPTY_PASSWORD=no
       - MYSQL_DATABASE=rmkpro
     # If you want to expose these ports outside your dev PC,
     # remove the "127.0.0.1:" prefix
