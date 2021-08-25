@@ -26,7 +26,9 @@ components:
       flows:
         authorizationCode:
           authorizationUrl: http://localhost:9080/auth/realms/jhipster/protocol/openid-connect/auth
+          #authorizationUrl: https://dev-54265046.okta.com/oauth2/default/v1/authorize
           tokenUrl: http://localhost:9080/auth/realms/jhipster/protocol/openid-connect/token
+          #tokenUrl: https://dev-54265046.okta.com/oauth2/default/v1/token
           scopes:
             jhipster: Jhipster specific claims
             email: Email claims
