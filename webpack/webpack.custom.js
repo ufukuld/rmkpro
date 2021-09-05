@@ -37,7 +37,7 @@ module.exports = (config, options, targetOptions) => {
       }),
       new WebpackNotifierPlugin({
         title: 'Rmkpro',
-        contentImage: path.join(__dirname, 'logo-jhipster.png'),
+        contentImage: path.join(__dirname, 'leasys-logo.png'),
       })
     );
   }
@@ -99,6 +99,7 @@ module.exports = (config, options, targetOptions) => {
       __TIMESTAMP__: JSON.stringify(environment.__TIMESTAMP__),
       // APP_VERSION is passed as an environment variable from the Gradle / Maven build tasks.
       __VERSION__: JSON.stringify(environment.__VERSION__),
+      __APP_NAME__: JSON.stringify(environment.__APP_NAME__),
       __DEBUG_INFO_ENABLED__: environment.__DEBUG_INFO_ENABLED__ || config.mode === 'development',
       // The root URL for API calls, ending with a '/' - for example: `"https://www.jhipster.tech:8081/myservice/"`.
       // If this URL is left empty (""), then it will be relative to the current context.
