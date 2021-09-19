@@ -1,0 +1,48 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div *ngIf="vehicle">
+      <h2 data-cy="vehicleDetailsHeading"><span jhiTranslate="rmkproApp.vehicle.detail.title">Vehicle</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ vehicle.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="rmkproApp.vehicle.registrationNumber">Registration Number</span></dt>
+        <dd>
+          <span>{{ vehicle.registrationNumber }}</span>
+        </dd>
+        <dt><span jhiTranslate="rmkproApp.vehicle.firstRegistrationDate">First Registration Date</span></dt>
+        <dd>
+          <span>{{ vehicle.firstRegistrationDate | formatMediumDate }}</span>
+        </dd>
+        <dt><span jhiTranslate="rmkproApp.vehicle.make">Make</span></dt>
+        <dd>
+          <div *ngIf="vehicle.make">
+            <a [routerLink]="['/make', vehicle.make?.id, 'view']">{{ vehicle.make?.id }}</a>
+          </div>
+        </dd>
+        <dt><span jhiTranslate="rmkproApp.vehicle.owner">Owner</span></dt>
+        <dd>
+          <div *ngIf="vehicle.owner">
+            <a [routerLink]="['/legal-entity', vehicle.owner?.id, 'view']">{{ vehicle.owner?.id }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/vehicle', vehicle.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

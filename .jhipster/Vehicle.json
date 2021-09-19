@@ -1,0 +1,39 @@
+{
+  "name": "Vehicle",
+  "fields": [
+    {
+      "fieldName": "registrationNumber",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "firstRegistrationDate",
+      "fieldType": "LocalDate",
+      "fieldValidateRules": ["required"]
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "make",
+      "otherEntityRelationshipName": "vehicle",
+      "relationshipName": "make"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "legalEntity",
+      "otherEntityRelationshipName": "vehicle",
+      "relationshipName": "owner"
+    }
+  ],
+  "entityTableName": "vehicle",
+  "dto": "no",
+  "pagination": "no",
+  "service": "no",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "applications": "*",
+  "changelogDate": "20210919143057"
+}

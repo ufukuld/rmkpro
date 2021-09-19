@@ -1,0 +1,25 @@
+{
+  "rmkproApp": {
+    "legalEntity": {
+      "home": {
+        "title": "Legal Entities",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Legal Entity",
+        "createOrEditLabel": "Create or edit a Legal Entity",
+        "notFound": "No Legal Entities found"
+      },
+      "created": "A new Legal Entity is created with identifier {{ param }}",
+      "updated": "A Legal Entity is updated with identifier {{ param }}",
+      "deleted": "A Legal Entity is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Legal Entity {{ id }}?"
+      },
+      "detail": {
+        "title": "Legal Entity"
+      },
+      "id": "ID",
+      "name": "Name",
+      "type": "Type"
+    }
+  }
+}

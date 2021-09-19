@@ -1,0 +1,25 @@
+{
+  "rmkproApp": {
+    "model": {
+      "home": {
+        "title": "Models",
+        "refreshListLabel": "Обновить список",
+        "createLabel": "Создать новый Model",
+        "createOrEditLabel": "Создать или отредактировать Model",
+        "notFound": "Models не найдено"
+      },
+      "created": "Новый Model создан с идентификатором {{ param }}",
+      "updated": "Model обновлен с идентификатором {{ param }}",
+      "deleted": "Model удален с идентификатором {{ param }}",
+      "delete": {
+        "question": "Вы уверены что хотите удалить Model {{ id }}?"
+      },
+      "detail": {
+        "title": "Model"
+      },
+      "id": "ID",
+      "label": "Label",
+      "make": "Make"
+    }
+  }
+}

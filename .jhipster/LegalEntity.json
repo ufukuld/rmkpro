@@ -1,0 +1,29 @@
+{
+  "name": "LegalEntity",
+  "fields": [
+    {
+      "fieldName": "name",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "one-to-one",
+      "otherEntityName": "legalEntityType",
+      "otherEntityRelationshipName": "legalEntity",
+      "relationshipName": "type",
+      "ownerSide": true
+    }
+  ],
+  "entityTableName": "legal_entity",
+  "dto": "no",
+  "pagination": "no",
+  "service": "no",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "applications": "*",
+  "changelogDate": "20210919143054"
+}

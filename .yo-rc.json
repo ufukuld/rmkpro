@@ -41,6 +41,8 @@
     "packageFolder": "com/teamwill/rmkpro",
     "devServerPort": 4200,
     "clientPackageManager": "npm",
-    "languages": ["en", "fr", "ru", "es"]
+    "languages": ["en", "fr", "ru", "es"],
+    "entities": ["LegalEntity", "Model", "Make", "Vehicle", "LegalEntityType"],
+    "lastLiquibaseTimestamp": 1632062858000
   }
 }

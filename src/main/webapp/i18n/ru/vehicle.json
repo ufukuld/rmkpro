@@ -1,0 +1,27 @@
+{
+  "rmkproApp": {
+    "vehicle": {
+      "home": {
+        "title": "Vehicles",
+        "refreshListLabel": "Обновить список",
+        "createLabel": "Создать новый Vehicle",
+        "createOrEditLabel": "Создать или отредактировать Vehicle",
+        "notFound": "Vehicles не найдено"
+      },
+      "created": "Новый Vehicle создан с идентификатором {{ param }}",
+      "updated": "Vehicle обновлен с идентификатором {{ param }}",
+      "deleted": "Vehicle удален с идентификатором {{ param }}",
+      "delete": {
+        "question": "Вы уверены что хотите удалить Vehicle {{ id }}?"
+      },
+      "detail": {
+        "title": "Vehicle"
+      },
+      "id": "ID",
+      "registrationNumber": "Registration Number",
+      "firstRegistrationDate": "First Registration Date",
+      "make": "Make",
+      "owner": "Owner"
+    }
+  }
+}

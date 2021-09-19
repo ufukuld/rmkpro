@@ -1,0 +1,24 @@
+{
+  "rmkproApp": {
+    "legalEntityType": {
+      "home": {
+        "title": "LegalEntityTypes",
+        "refreshListLabel": "Actualiser la liste",
+        "createLabel": "Créer un nouveau Legal Entity Type",
+        "createOrEditLabel": "Créer ou éditer un Legal Entity Type",
+        "notFound": "Aucun Legal Entity Type trouvé"
+      },
+      "created": "Un nouveau Legal Entity Type a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Legal Entity Type avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Legal Entity Type avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Etes-vous certain de vouloir supprimer le Legal Entity Type {{ id }} ?"
+      },
+      "detail": {
+        "title": "Legal Entity Type"
+      },
+      "id": "ID",
+      "label": "Label"
+    }
+  }
+}

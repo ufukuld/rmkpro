@@ -1,0 +1,24 @@
+{
+  "rmkproApp": {
+    "make": {
+      "home": {
+        "title": "Makes",
+        "refreshListLabel": "Refrescar lista",
+        "createLabel": "Crear nuevo Make",
+        "createOrEditLabel": "Crear o editar Make",
+        "notFound": "Ningún Makes encontrado"
+      },
+      "created": "Un nuevo Make ha sido creado con el identificador {{ param }}",
+      "updated": "Un Make ha sido actualizado con el identificador {{ param }}",
+      "deleted": "Un Make ha sido eliminado con el identificador {{ param }}",
+      "delete": {
+        "question": "¿Seguro que quiere eliminar Make {{ id }}?"
+      },
+      "detail": {
+        "title": "Make"
+      },
+      "id": "ID",
+      "label": "Label"
+    }
+  }
+}

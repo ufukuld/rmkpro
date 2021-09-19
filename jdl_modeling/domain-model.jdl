@@ -1,0 +1,55 @@
+/*
+== One to One relationship is a condition where data in a table only has a relationship to one data in another table. 
+Ex: One employee only has one account and vice versa.
+
+== A many-to-one relationship is where one entity (typically a column or set of columns) contains values that refer to another
+ entity (a column or set of columns) that has unique values.
+Ex: a Make has many Models -> Many Models maps to One make
+
+== A one-to-many relationship occurs in database design when one entity has a multivalued relationship with another entity.
+Ex: One position can have many employees, but each employee can only work for one position.
+
+== A many-to-many relationship is a relationship that is multivalued in both directions.
+Ex: One account can have more than one role, and one role can have more than one account.
+*/
+
+// A Legal Entity is a person or company.
+entity LegalEntity {
+  name String required
+}
+
+// Legal Entity Type is private individual or Company
+entity LegalEntityType {
+  label String required
+}
+
+entity Model {
+  label String required
+}
+
+// The Make or Brand (ex. Toyota)
+entity Make {
+  label String required
+}
+
+entity Vehicle {
+  registrationNumber String required
+  firstRegistrationDate LocalDate required
+}
+
+// the field name is indicated between brackets
+// a Vehicle has one Make 
+// a Vehicle has one Owner (LegalEntity)
+// a Make has many Models
+relationship ManyToOne {
+  Vehicle{make} to Make,
+  Vehicle{owner} to LegalEntity,
+  Model{make} to Make
+}
+
+/**
+ * One to one relationship.
+ */
+relationship OneToOne {
+    LegalEntity{type} to LegalEntityType
+}

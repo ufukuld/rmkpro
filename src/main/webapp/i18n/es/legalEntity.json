@@ -1,0 +1,25 @@
+{
+  "rmkproApp": {
+    "legalEntity": {
+      "home": {
+        "title": "Legal Entities",
+        "refreshListLabel": "Refrescar lista",
+        "createLabel": "Crear nuevo Legal Entity",
+        "createOrEditLabel": "Crear o editar Legal Entity",
+        "notFound": "Ningún Legal Entities encontrado"
+      },
+      "created": "Un nuevo Legal Entity ha sido creado con el identificador {{ param }}",
+      "updated": "Un Legal Entity ha sido actualizado con el identificador {{ param }}",
+      "deleted": "Un Legal Entity ha sido eliminado con el identificador {{ param }}",
+      "delete": {
+        "question": "¿Seguro que quiere eliminar Legal Entity {{ id }}?"
+      },
+      "detail": {
+        "title": "Legal Entity"
+      },
+      "id": "ID",
+      "name": "Name",
+      "type": "Type"
+    }
+  }
+}
