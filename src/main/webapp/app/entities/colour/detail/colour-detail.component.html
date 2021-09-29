@@ -1,0 +1,36 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div *ngIf="colour">
+      <h2 data-cy="colourDetailsHeading"><span jhiTranslate="rmkproApp.colour.detail.title">Colour</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ colour.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="rmkproApp.colour.label">Label</span></dt>
+        <dd>
+          <span>{{ colour.label }}</span>
+        </dd>
+        <dt><span jhiTranslate="rmkproApp.colour.paintType">Paint Type</span></dt>
+        <dd>
+          <span jhiTranslate="{{ 'rmkproApp.PaintType.' + colour.paintType }}">{{ colour.paintType }}</span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/colour', colour.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,44 @@
+{
+  "name": "Costs",
+  "fields": [
+    {
+      "fieldName": "detail",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "unitPrice",
+      "fieldType": "BigDecimal"
+    },
+    {
+      "fieldName": "vatAmount",
+      "fieldType": "BigDecimal"
+    },
+    {
+      "fieldName": "vatPercentage",
+      "fieldType": "BigDecimal"
+    },
+    {
+      "fieldName": "netAmount",
+      "fieldType": "BigDecimal"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "vehicle",
+      "otherEntityRelationshipName": "costs",
+      "relationshipName": "vehicle"
+    }
+  ],
+  "entityTableName": "costs",
+  "dto": "no",
+  "pagination": "no",
+  "service": "no",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "applications": "*",
+  "changelogDate": "20210929200532"
+}

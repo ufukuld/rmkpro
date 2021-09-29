@@ -46,7 +46,7 @@
           <td>{{ model.label }}</td>
           <td>
             <div *ngIf="model.make">
-              <a [routerLink]="['/make', model.make?.id, 'view']">{{ model.make?.id }}</a>
+              <a [routerLink]="['/make', model.make?.id, 'view']">{{ model.make?.label }}</a>
             </div>
           </td>
           <td class="text-right">

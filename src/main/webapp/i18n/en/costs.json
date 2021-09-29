@@ -1,0 +1,29 @@
+{
+  "rmkproApp": {
+    "costs": {
+      "home": {
+        "title": "Costs",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Costs",
+        "createOrEditLabel": "Create or edit a Costs",
+        "notFound": "No Costs found"
+      },
+      "created": "A new Costs is created with identifier {{ param }}",
+      "updated": "A Costs is updated with identifier {{ param }}",
+      "deleted": "A Costs is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Costs {{ id }}?"
+      },
+      "detail": {
+        "title": "Costs"
+      },
+      "id": "ID",
+      "detail": "Detail",
+      "unitPrice": "Unit Price",
+      "vatAmount": "Vat Amount",
+      "vatPercentage": "Vat Percentage",
+      "netAmount": "Net Amount",
+      "vehicle": "Vehicle"
+    }
+  }
+}

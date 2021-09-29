@@ -1,0 +1,25 @@
+{
+  "rmkproApp": {
+    "colour": {
+      "home": {
+        "title": "Colours",
+        "refreshListLabel": "Обновить список",
+        "createLabel": "Создать новый Colour",
+        "createOrEditLabel": "Создать или отредактировать Colour",
+        "notFound": "Colours не найдено"
+      },
+      "created": "Новый Colour создан с идентификатором {{ param }}",
+      "updated": "Colour обновлен с идентификатором {{ param }}",
+      "deleted": "Colour удален с идентификатором {{ param }}",
+      "delete": {
+        "question": "Вы уверены что хотите удалить Colour {{ id }}?"
+      },
+      "detail": {
+        "title": "Colour"
+      },
+      "id": "ID",
+      "label": "Label",
+      "paintType": "Paint Type"
+    }
+  }
+}

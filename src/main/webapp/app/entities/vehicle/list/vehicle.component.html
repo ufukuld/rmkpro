@@ -35,8 +35,14 @@
           <th scope="col"><span jhiTranslate="global.field.id">ID</span></th>
           <th scope="col"><span jhiTranslate="rmkproApp.vehicle.registrationNumber">Registration Number</span></th>
           <th scope="col"><span jhiTranslate="rmkproApp.vehicle.firstRegistrationDate">First Registration Date</span></th>
-          <th scope="col"><span jhiTranslate="rmkproApp.vehicle.make">Make</span></th>
+          <th scope="col"><span jhiTranslate="rmkproApp.vehicle.status">Status</span></th>
+          <th scope="col"><span jhiTranslate="rmkproApp.vehicle.mileage">Mileage</span></th>
+          <th scope="col"><span jhiTranslate="rmkproApp.vehicle.reservePrice">Reserve Price</span></th>
+          <th scope="col"><span jhiTranslate="rmkproApp.vehicle.proposedSalePrice">Proposed Sale Price</span></th>
+          <th scope="col"><span jhiTranslate="rmkproApp.vehicle.netBookValue">Net Book Value</span></th>
+          <th scope="col"><span jhiTranslate="rmkproApp.vehicle.trim">Trim</span></th>
           <th scope="col"><span jhiTranslate="rmkproApp.vehicle.owner">Owner</span></th>
+          <th scope="col"><span jhiTranslate="rmkproApp.vehicle.colour">Colour</span></th>
           <th scope="col"></th>
         </tr>
       </thead>
@@ -47,14 +53,24 @@
           </td>
           <td>{{ vehicle.registrationNumber }}</td>
           <td>{{ vehicle.firstRegistrationDate | formatMediumDate }}</td>
+          <td jhiTranslate="{{ 'rmkproApp.VehicleStatus.' + vehicle.status }}">{{ vehicle.status }}</td>
+          <td>{{ vehicle.mileage }}</td>
+          <td>{{ vehicle.reservePrice }}</td>
+          <td>{{ vehicle.proposedSalePrice }}</td>
+          <td>{{ vehicle.netBookValue }}</td>
           <td>
-            <div *ngIf="vehicle.make">
-              <a [routerLink]="['/make', vehicle.make?.id, 'view']">{{ vehicle.make?.id }}</a>
+            <div *ngIf="vehicle.trim">
+              <a [routerLink]="['/trim', vehicle.trim?.id, 'view']">{{ vehicle.trim?.id }}</a>
             </div>
           </td>
           <td>
             <div *ngIf="vehicle.owner">
               <a [routerLink]="['/legal-entity', vehicle.owner?.id, 'view']">{{ vehicle.owner?.id }}</a>
+            </div>
+          </td>
+          <td>
+            <div *ngIf="vehicle.colour">
+              <a [routerLink]="['/colour', vehicle.colour?.id, 'view']">{{ vehicle.colour?.id }}</a>
             </div>
           </td>
           <td class="text-right">

@@ -1,6 +1,7 @@
 import { TestBed } from '@angular/core/testing';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 
+import { LegalEntityType } from 'app/entities/enumerations/legal-entity-type.model';
 import { ILegalEntity, LegalEntity } from '../legal-entity.model';
 
 import { LegalEntityService } from './legal-entity.service';
@@ -22,7 +23,11 @@ describe('Service Tests', () => {
 
       elemDefault = {
         id: 0,
-        name: 'AAAAAAA',
+        postCode: 'AAAAAAA',
+        streetAddress: 'AAAAAAA',
+        email: 'AAAAAAA',
+        phone: 'AAAAAAA',
+        type: LegalEntityType.PRIVATE_INDIVIDUAL,
       };
     });
 
@@ -58,7 +63,11 @@ describe('Service Tests', () => {
         const returnedFromService = Object.assign(
           {
             id: 1,
-            name: 'BBBBBB',
+            postCode: 'BBBBBB',
+            streetAddress: 'BBBBBB',
+            email: 'BBBBBB',
+            phone: 'BBBBBB',
+            type: 'BBBBBB',
           },
           elemDefault
         );
@@ -73,7 +82,12 @@ describe('Service Tests', () => {
       });
 
       it('should partial update a LegalEntity', () => {
-        const patchObject = Object.assign({}, new LegalEntity());
+        const patchObject = Object.assign(
+          {
+            type: 'BBBBBB',
+          },
+          new LegalEntity()
+        );
 
         const returnedFromService = Object.assign(patchObject, elemDefault);
 
@@ -90,7 +104,11 @@ describe('Service Tests', () => {
         const returnedFromService = Object.assign(
           {
             id: 1,
-            name: 'BBBBBB',
+            postCode: 'BBBBBB',
+            streetAddress: 'BBBBBB',
+            email: 'BBBBBB',
+            phone: 'BBBBBB',
+            type: 'BBBBBB',
           },
           elemDefault
         );
@@ -142,7 +160,7 @@ describe('Service Tests', () => {
         });
 
         it('should add only unique LegalEntity to an array', () => {
-          const legalEntityArray: ILegalEntity[] = [{ id: 123 }, { id: 456 }, { id: 33404 }];
+          const legalEntityArray: ILegalEntity[] = [{ id: 123 }, { id: 456 }, { id: 32750 }];
           const legalEntityCollection: ILegalEntity[] = [{ id: 123 }];
           expectedResult = service.addLegalEntityToCollectionIfMissing(legalEntityCollection, ...legalEntityArray);
           expect(expectedResult).toHaveLength(3);

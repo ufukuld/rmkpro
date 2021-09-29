@@ -2,17 +2,43 @@
   "name": "LegalEntity",
   "fields": [
     {
-      "fieldName": "name",
+      "fieldName": "postCode",
       "fieldType": "String",
       "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "streetAddress",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "email",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "phone",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "type",
+      "fieldType": "LegalEntityType",
+      "fieldValues": "PRIVATE_INDIVIDUAL (Private Individual),CORPORATION (Corporation)"
     }
   ],
   "relationships": [
     {
       "relationshipType": "one-to-one",
-      "otherEntityName": "legalEntityType",
+      "otherEntityName": "person",
       "otherEntityRelationshipName": "legalEntity",
-      "relationshipName": "type",
+      "relationshipName": "person",
+      "ownerSide": true
+    },
+    {
+      "relationshipType": "one-to-one",
+      "otherEntityName": "company",
+      "otherEntityRelationshipName": "legalEntity",
+      "relationshipName": "company",
       "ownerSide": true
     }
   ],

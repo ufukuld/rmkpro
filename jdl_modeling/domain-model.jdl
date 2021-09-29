@@ -1,5 +1,5 @@
 /*
-== One to One relationship is a condition where data in a table only has a relationship to one data in another table. 
+== One to One relationship is a condition where data in a table only has a relationship to one data in another table.
 Ex: One employee only has one account and vice versa.
 
 == A many-to-one relationship is where one entity (typically a column or set of columns) contains values that refer to another
@@ -15,14 +15,61 @@ Ex: One account can have more than one role, and one role can have more than one
 
 // A Legal Entity is a person or company.
 entity LegalEntity {
-  name String required
+  postCode String required
+  streetAddress String required
+  email String required
+  phone String
+  type LegalEntityType
+}
+
+// An individual who is a private legal entity or a representative of a company
+entity Person {
+   title String required
+   firstNames String required
+   surname String required
+}
+
+// A company
+entity Company {
+    name String required
+    department String
 }
 
 // Legal Entity Type is private individual or Company
-entity LegalEntityType {
-  label String required
+enum LegalEntityType {
+  PRIVATE_INDIVIDUAL("Private Individual"),
+  CORPORATION("Corporation")
 }
 
+enum FuelType {
+  PETROL("Petrol"),
+  DIESEL("Diesel"),
+  PETROL_HYBRID("Petrol Hybrid"),
+  ELECTRIC("Electric")
+}
+
+enum PaintType {
+  SOLID("Solid"),
+  METALLIC("Metallic"),
+  PEARLESCENT("Pearlescent"),
+  MATTE("Matte"),
+  SPECIAL("Special/Other")
+}
+
+enum VehicleStatus {
+   REQ_FOR_COLLECTION("Collection Requested"),
+   COLLECTED("Collected"),
+   IN_AUCTION("In Auction"),
+   SOLD("Sold")
+}
+
+entity Colour {
+  label String required
+  // optional: add HSV code
+  paintType PaintType required
+}
+
+// The model, e.g. Passat
 entity Model {
   label String required
 }
@@ -32,24 +79,57 @@ entity Make {
   label String required
 }
 
+// The trim level e.g. Trendline DSG
+entity Trim {
+  label String required
+  doors Integer required
+  seats Integer required
+  engineDisplacementCc Integer required
+  // todo: the last two items can be moved to an many-to-many attribute-value map
+  isAutomatic Boolean
+  fuelType FuelType required
+}
+
+// Any single item up for sale
 entity Vehicle {
   registrationNumber String required
   firstRegistrationDate LocalDate required
+  status VehicleStatus
+  mileage Integer required
+  reservePrice BigDecimal
+  proposedSalePrice BigDecimal
+  netBookValue BigDecimal
+  //TODO: may need analysis whether to put engine power/torque here or to trim
 }
 
-// the field name is indicated between brackets
-// a Vehicle has one Make 
-// a Vehicle has one Owner (LegalEntity)
-// a Make has many Models
+entity Costs {
+  detail String required
+  unitPrice BigDecimal
+  vatAmount BigDecimal
+  vatPercentage BigDecimal
+  netAmount BigDecimal
+}
+
+entity VehicleImages {
+  contentType String required
+  image Blob required
+}
+
 relationship ManyToOne {
-  Vehicle{make} to Make,
-  Vehicle{owner} to LegalEntity,
+  Vehicle{trim} to Trim
+  Trim{model} to Model
+  Vehicle{owner} to LegalEntity
+  Vehicle{colour} to Colour
   Model{make} to Make
+  Company{contactPerson} to Person
 }
 
-/**
- * One to one relationship.
- */
+relationship OneToMany {
+  Vehicle{images} to VehicleImages
+  Vehicle{costs} to Costs
+}
+
 relationship OneToOne {
-    LegalEntity{type} to LegalEntityType
+    LegalEntity{person} to Person
+    LegalEntity{company} to Company
 }

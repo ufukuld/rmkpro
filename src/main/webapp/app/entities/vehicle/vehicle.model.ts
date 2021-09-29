@@ -1,13 +1,25 @@
 import * as dayjs from 'dayjs';
-import { IMake } from 'app/entities/make/make.model';
+import { IVehicleImages } from 'app/entities/vehicle-images/vehicle-images.model';
+import { ICosts } from 'app/entities/costs/costs.model';
+import { ITrim } from 'app/entities/trim/trim.model';
 import { ILegalEntity } from 'app/entities/legal-entity/legal-entity.model';
+import { IColour } from 'app/entities/colour/colour.model';
+import { VehicleStatus } from 'app/entities/enumerations/vehicle-status.model';
 
 export interface IVehicle {
   id?: number;
   registrationNumber?: string;
   firstRegistrationDate?: dayjs.Dayjs;
-  make?: IMake | null;
+  status?: VehicleStatus | null;
+  mileage?: number;
+  reservePrice?: number | null;
+  proposedSalePrice?: number | null;
+  netBookValue?: number | null;
+  images?: IVehicleImages[] | null;
+  costs?: ICosts[] | null;
+  trim?: ITrim | null;
   owner?: ILegalEntity | null;
+  colour?: IColour | null;
 }
 
 export class Vehicle implements IVehicle {
@@ -15,8 +27,16 @@ export class Vehicle implements IVehicle {
     public id?: number,
     public registrationNumber?: string,
     public firstRegistrationDate?: dayjs.Dayjs,
-    public make?: IMake | null,
-    public owner?: ILegalEntity | null
+    public status?: VehicleStatus | null,
+    public mileage?: number,
+    public reservePrice?: number | null,
+    public proposedSalePrice?: number | null,
+    public netBookValue?: number | null,
+    public images?: IVehicleImages[] | null,
+    public costs?: ICosts[] | null,
+    public trim?: ITrim | null,
+    public owner?: ILegalEntity | null,
+    public colour?: IColour | null
   ) {}
 }
 

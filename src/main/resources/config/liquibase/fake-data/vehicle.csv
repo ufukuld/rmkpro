@@ -1,11 +1,7 @@
-id;registration_number;first_registration_date
-1;SMS Shoes;2021-09-19
-2;Assistant;2021-09-19
-3;transmitter backing;2021-09-19
-4;indexing Jersey panel;2021-09-19
-5;relationships Bedfordshire Chips;2021-09-18
-6;Architect Music;2021-09-18
-7;Loan Fresh;2021-09-19
-8;Riyal programming;2021-09-18
-9;Berkshire Intelligent;2021-09-18
-10;Kentucky SDD;2021-09-18
+id;trim_id;registration_number;first_registration_date;status;mileage;reserve_price;proposed_sale_price;net_book_value
+1;1;ABC 123;2021-09-19;REQ_FOR_COLLECTION;99529;83983;53567;23362
+2;2;DEF 3FA;2021-09-19;SOLD;83448;48576;4006;56227
+3;3;X32 ASC;2021-09-19;IN_AUCTION;25777;48581;20240;99598
+4;4;2DA FSE;2021-09-18;SOLD;47291;84236;3349;9413
+5;5;XC5 43D;2021-09-19;IN_AUCTION;69349;61784;84833;93719
+6;6;XCC CCC;2021-09-19;SOLD;94937;40809;57476;33854

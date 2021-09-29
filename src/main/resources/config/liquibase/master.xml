@@ -14,16 +14,24 @@
     <property name="datetimeType" value="datetime(6)" dbms="mysql, mariadb"/>
     <property name="datetimeType" value="datetime" dbms="oracle, mssql, postgresql, h2"/>
 
-    <include file="config/liquibase/changelog/00000000000000_initial_schema.xml" relativeToChangelogFile="false"/>
-    <include file="config/liquibase/changelog/20210919_rename_existing_core_tables.xml" relativeToChangelogFile="false"/>
-    <include file="config/liquibase/changelog/20210919_added_entity_LegalEntity.xml" relativeToChangelogFile="false"/>
-    <include file="config/liquibase/changelog/20210919_added_entity_LegalEntityType.xml" relativeToChangelogFile="false"/>
-    <include file="config/liquibase/changelog/20210919_added_entity_Make.xml" relativeToChangelogFile="false"/>
-    <include file="config/liquibase/changelog/20210919_added_entity_Model.xml" relativeToChangelogFile="false"/>
-    <include file="config/liquibase/changelog/20210919_added_entity_Vehicle.xml" relativeToChangelogFile="false"/>
-    <include file="config/liquibase/changelog/20210919_added_entity_constraints_Model.xml" relativeToChangelogFile="false"/>
-    <include file="config/liquibase/changelog/20210919_added_entity_constraints_LegalEntity.xml" relativeToChangelogFile="false"/>
-    <include file="config/liquibase/changelog/20210919_added_entity_constraints_Vehicle.xml" relativeToChangelogFile="false"/>
-
-
+    <include file="config/liquibase/changelog/00000000000000_initial_schema.xml" relativeToChangelogFile="false" />
+    <include file="config/liquibase/changelog/20210919_rename_existing_core_tables.xml" relativeToChangelogFile="false" />
+    <include file="config/liquibase/changelog/20210919143054_added_entity_LegalEntity.xml" relativeToChangelogFile="false" />
+    <include file="config/liquibase/changelog/20210919143055_added_entity_Model.xml" relativeToChangelogFile="false" />
+    <include file="config/liquibase/changelog/20210919143056_added_entity_Make.xml" relativeToChangelogFile="false" />
+    <include file="config/liquibase/changelog/20210919143057_added_entity_Vehicle.xml" relativeToChangelogFile="false" />
+    <include file="config/liquibase/changelog/20210919144738_added_entity_LegalEntityType.xml" relativeToChangelogFile="false" />
+    <include file="config/liquibase/changelog/20210929194726_added_entity_Person.xml" relativeToChangelogFile="false" />
+    <include file="config/liquibase/changelog/20210929194727_added_entity_Company.xml" relativeToChangelogFile="false" />
+    <include file="config/liquibase/changelog/20210929194728_added_entity_Colour.xml" relativeToChangelogFile="false" />
+    <include file="config/liquibase/changelog/20210929194729_added_entity_Trim.xml" relativeToChangelogFile="false" />
+    <include file="config/liquibase/changelog/20210929200532_added_entity_Costs.xml" relativeToChangelogFile="false" />
+    <include file="config/liquibase/changelog/20210929200533_added_entity_VehicleImages.xml" relativeToChangelogFile="false" />
+    <include file="config/liquibase/changelog/20210919143054_added_entity_constraints_LegalEntity.xml" relativeToChangelogFile="false" />
+    <include file="config/liquibase/changelog/20210919143055_added_entity_constraints_Model.xml" relativeToChangelogFile="false" />
+    <include file="config/liquibase/changelog/20210919143057_added_entity_constraints_Vehicle.xml" relativeToChangelogFile="false" />
+    <include file="config/liquibase/changelog/20210929194727_added_entity_constraints_Company.xml" relativeToChangelogFile="false" />
+    <include file="config/liquibase/changelog/20210929194729_added_entity_constraints_Trim.xml" relativeToChangelogFile="false" />
+    <include file="config/liquibase/changelog/20210929200532_added_entity_constraints_Costs.xml" relativeToChangelogFile="false" />
+    <include file="config/liquibase/changelog/20210929200533_added_entity_constraints_VehicleImages.xml" relativeToChangelogFile="false" />
 </databaseChangeLog>

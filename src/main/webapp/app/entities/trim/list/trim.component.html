@@ -1,0 +1,84 @@
+<div>
+  <h2 id="page-heading" data-cy="TrimHeading">
+    <span jhiTranslate="rmkproApp.trim.home.title">Trims</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info mr-2" (click)="loadAll()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span jhiTranslate="rmkproApp.trim.home.refreshListLabel">Refresh List</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-trim"
+        [routerLink]="['/trim/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="rmkproApp.trim.home.createLabel"> Create a new Trim </span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="trims?.length === 0">
+    <span jhiTranslate="rmkproApp.trim.home.notFound">No trims found</span>
+  </div>
+
+  <div class="table-responsive" id="entities" *ngIf="trims && trims.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr>
+          <th scope="col"><span jhiTranslate="global.field.id">ID</span></th>
+          <th scope="col"><span jhiTranslate="rmkproApp.trim.label">Label</span></th>
+          <th scope="col"><span jhiTranslate="rmkproApp.trim.doors">Doors</span></th>
+          <th scope="col"><span jhiTranslate="rmkproApp.trim.seats">Seats</span></th>
+          <th scope="col"><span jhiTranslate="rmkproApp.trim.engineDisplacementCc">Engine Displacement Cc</span></th>
+          <th scope="col"><span jhiTranslate="rmkproApp.trim.isAutomatic">Is Automatic</span></th>
+          <th scope="col"><span jhiTranslate="rmkproApp.trim.fuelType">Fuel Type</span></th>
+          <th scope="col"><span jhiTranslate="rmkproApp.trim.model">Model</span></th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let trim of trims; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/trim', trim.id, 'view']">{{ trim.id }}</a>
+          </td>
+          <td>{{ trim.label }}</td>
+          <td>{{ trim.doors }}</td>
+          <td>{{ trim.seats }}</td>
+          <td>{{ trim.engineDisplacementCc }}</td>
+          <td>{{ trim.isAutomatic }}</td>
+          <td jhiTranslate="{{ 'rmkproApp.FuelType.' + trim.fuelType }}">{{ trim.fuelType }}</td>
+          <td>
+            <div *ngIf="trim.model">
+              <a [routerLink]="['/model', trim.model?.id, 'view']">{{ trim.model?.make?.label }} {{ trim.model?.label }}</a>
+            </div>
+          </td>
+          <td class="text-right">
+            <div class="btn-group">
+              <button type="submit" [routerLink]="['/trim', trim.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+              </button>
+
+              <button type="submit" [routerLink]="['/trim', trim.id, 'edit']" class="btn btn-primary btn-sm" data-cy="entityEditButton">
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(trim)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

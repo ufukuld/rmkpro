@@ -1,0 +1,45 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div *ngIf="vehicleImages">
+      <h2 data-cy="vehicleImagesDetailsHeading"><span jhiTranslate="rmkproApp.vehicleImages.detail.title">Vehicle Images</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ vehicleImages.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="rmkproApp.vehicleImages.contentType">Content Type</span></dt>
+        <dd>
+          <span>{{ vehicleImages.contentType }}</span>
+        </dd>
+        <dt><span jhiTranslate="rmkproApp.vehicleImages.image">Image</span></dt>
+        <dd>
+          <div *ngIf="vehicleImages.image">
+            <a (click)="openFile(vehicleImages.image, vehicleImages.imageContentType)" jhiTranslate="entity.action.open">open</a>
+            {{ vehicleImages.imageContentType }}, {{ byteSize(vehicleImages.image) }}
+          </div>
+        </dd>
+        <dt><span jhiTranslate="rmkproApp.vehicleImages.vehicle">Vehicle</span></dt>
+        <dd>
+          <div *ngIf="vehicleImages.vehicle">
+            <a [routerLink]="['/vehicle', vehicleImages.vehicle?.id, 'view']">{{ vehicleImages.vehicle?.id }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/vehicle-images', vehicleImages.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,94 @@
+<div>
+  <h2 id="page-heading" data-cy="VehicleImagesHeading">
+    <span jhiTranslate="rmkproApp.vehicleImages.home.title">Vehicle Images</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info mr-2" (click)="loadAll()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span jhiTranslate="rmkproApp.vehicleImages.home.refreshListLabel">Refresh List</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-vehicle-images"
+        [routerLink]="['/vehicle-images/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="rmkproApp.vehicleImages.home.createLabel"> Create a new Vehicle Images </span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="vehicleImages?.length === 0">
+    <span jhiTranslate="rmkproApp.vehicleImages.home.notFound">No vehicleImages found</span>
+  </div>
+
+  <div class="table-responsive" id="entities" *ngIf="vehicleImages && vehicleImages.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr>
+          <th scope="col"><span jhiTranslate="global.field.id">ID</span></th>
+          <th scope="col"><span jhiTranslate="rmkproApp.vehicleImages.contentType">Content Type</span></th>
+          <th scope="col"><span jhiTranslate="rmkproApp.vehicleImages.image">Image</span></th>
+          <th scope="col"><span jhiTranslate="rmkproApp.vehicleImages.vehicle">Vehicle</span></th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let vehicleImages of vehicleImages; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/vehicle-images', vehicleImages.id, 'view']">{{ vehicleImages.id }}</a>
+          </td>
+          <td>{{ vehicleImages.contentType }}</td>
+          <td>
+            <a
+              *ngIf="vehicleImages.image"
+              (click)="openFile(vehicleImages.image, vehicleImages.imageContentType)"
+              jhiTranslate="entity.action.open"
+              >open</a
+            >
+            <span *ngIf="vehicleImages.image">{{ vehicleImages.imageContentType }}, {{ byteSize(vehicleImages.image) }}</span>
+          </td>
+          <td>
+            <div *ngIf="vehicleImages.vehicle">
+              <a [routerLink]="['/vehicle', vehicleImages.vehicle?.id, 'view']">{{ vehicleImages.vehicle?.id }}</a>
+            </div>
+          </td>
+          <td class="text-right">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/vehicle-images', vehicleImages.id, 'view']"
+                class="btn btn-info btn-sm"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/vehicle-images', vehicleImages.id, 'edit']"
+                class="btn btn-primary btn-sm"
+                data-cy="entityEditButton"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(vehicleImages)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

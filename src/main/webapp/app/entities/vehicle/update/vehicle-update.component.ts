@@ -7,10 +7,12 @@ import { finalize, map } from 'rxjs/operators';
 
 import { IVehicle, Vehicle } from '../vehicle.model';
 import { VehicleService } from '../service/vehicle.service';
-import { IMake } from 'app/entities/make/make.model';
-import { MakeService } from 'app/entities/make/service/make.service';
+import { ITrim } from 'app/entities/trim/trim.model';
+import { TrimService } from 'app/entities/trim/service/trim.service';
 import { ILegalEntity } from 'app/entities/legal-entity/legal-entity.model';
 import { LegalEntityService } from 'app/entities/legal-entity/service/legal-entity.service';
+import { IColour } from 'app/entities/colour/colour.model';
+import { ColourService } from 'app/entities/colour/service/colour.service';
 
 @Component({
   selector: 'jhi-vehicle-update',
@@ -19,21 +21,29 @@ import { LegalEntityService } from 'app/entities/legal-entity/service/legal-enti
 export class VehicleUpdateComponent implements OnInit {
   isSaving = false;
 
-  makesSharedCollection: IMake[] = [];
+  trimsSharedCollection: ITrim[] = [];
   legalEntitiesSharedCollection: ILegalEntity[] = [];
+  coloursSharedCollection: IColour[] = [];
 
   editForm = this.fb.group({
     id: [],
     registrationNumber: [null, [Validators.required]],
     firstRegistrationDate: [null, [Validators.required]],
-    make: [],
+    status: [],
+    mileage: [null, [Validators.required]],
+    reservePrice: [],
+    proposedSalePrice: [],
+    netBookValue: [],
+    trim: [],
     owner: [],
+    colour: [],
   });
 
   constructor(
     protected vehicleService: VehicleService,
-    protected makeService: MakeService,
+    protected trimService: TrimService,
     protected legalEntityService: LegalEntityService,
+    protected colourService: ColourService,
     protected activatedRoute: ActivatedRoute,
     protected fb: FormBuilder
   ) {}
@@ -60,11 +70,15 @@ export class VehicleUpdateComponent implements OnInit {
     }
   }
 
-  trackMakeById(index: number, item: IMake): number {
+  trackTrimById(index: number, item: ITrim): number {
     return item.id!;
   }
 
   trackLegalEntityById(index: number, item: ILegalEntity): number {
+    return item.id!;
+  }
+
+  trackColourById(index: number, item: IColour): number {
     return item.id!;
   }
 
@@ -92,23 +106,30 @@ export class VehicleUpdateComponent implements OnInit {
       id: vehicle.id,
       registrationNumber: vehicle.registrationNumber,
       firstRegistrationDate: vehicle.firstRegistrationDate,
-      make: vehicle.make,
+      status: vehicle.status,
+      mileage: vehicle.mileage,
+      reservePrice: vehicle.reservePrice,
+      proposedSalePrice: vehicle.proposedSalePrice,
+      netBookValue: vehicle.netBookValue,
+      trim: vehicle.trim,
       owner: vehicle.owner,
+      colour: vehicle.colour,
     });
 
-    this.makesSharedCollection = this.makeService.addMakeToCollectionIfMissing(this.makesSharedCollection, vehicle.make);
+    this.trimsSharedCollection = this.trimService.addTrimToCollectionIfMissing(this.trimsSharedCollection, vehicle.trim);
     this.legalEntitiesSharedCollection = this.legalEntityService.addLegalEntityToCollectionIfMissing(
       this.legalEntitiesSharedCollection,
       vehicle.owner
     );
+    this.coloursSharedCollection = this.colourService.addColourToCollectionIfMissing(this.coloursSharedCollection, vehicle.colour);
   }
 
   protected loadRelationshipsOptions(): void {
-    this.makeService
+    this.trimService
       .query()
-      .pipe(map((res: HttpResponse<IMake[]>) => res.body ?? []))
-      .pipe(map((makes: IMake[]) => this.makeService.addMakeToCollectionIfMissing(makes, this.editForm.get('make')!.value)))
-      .subscribe((makes: IMake[]) => (this.makesSharedCollection = makes));
+      .pipe(map((res: HttpResponse<ITrim[]>) => res.body ?? []))
+      .pipe(map((trims: ITrim[]) => this.trimService.addTrimToCollectionIfMissing(trims, this.editForm.get('trim')!.value)))
+      .subscribe((trims: ITrim[]) => (this.trimsSharedCollection = trims));
 
     this.legalEntityService
       .query()
@@ -119,6 +140,12 @@ export class VehicleUpdateComponent implements OnInit {
         )
       )
       .subscribe((legalEntities: ILegalEntity[]) => (this.legalEntitiesSharedCollection = legalEntities));
+
+    this.colourService
+      .query()
+      .pipe(map((res: HttpResponse<IColour[]>) => res.body ?? []))
+      .pipe(map((colours: IColour[]) => this.colourService.addColourToCollectionIfMissing(colours, this.editForm.get('colour')!.value)))
+      .subscribe((colours: IColour[]) => (this.coloursSharedCollection = colours));
   }
 
   protected createFromForm(): IVehicle {
@@ -127,8 +154,14 @@ export class VehicleUpdateComponent implements OnInit {
       id: this.editForm.get(['id'])!.value,
       registrationNumber: this.editForm.get(['registrationNumber'])!.value,
       firstRegistrationDate: this.editForm.get(['firstRegistrationDate'])!.value,
-      make: this.editForm.get(['make'])!.value,
+      status: this.editForm.get(['status'])!.value,
+      mileage: this.editForm.get(['mileage'])!.value,
+      reservePrice: this.editForm.get(['reservePrice'])!.value,
+      proposedSalePrice: this.editForm.get(['proposedSalePrice'])!.value,
+      netBookValue: this.editForm.get(['netBookValue'])!.value,
+      trim: this.editForm.get(['trim'])!.value,
       owner: this.editForm.get(['owner'])!.value,
+      colour: this.editForm.get(['colour'])!.value,
     };
   }
 }

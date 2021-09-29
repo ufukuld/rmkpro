@@ -1,0 +1,54 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div *ngIf="costs">
+      <h2 data-cy="costsDetailsHeading"><span jhiTranslate="rmkproApp.costs.detail.title">Costs</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ costs.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="rmkproApp.costs.detail">Detail</span></dt>
+        <dd>
+          <span>{{ costs.detail }}</span>
+        </dd>
+        <dt><span jhiTranslate="rmkproApp.costs.unitPrice">Unit Price</span></dt>
+        <dd>
+          <span>{{ costs.unitPrice }}</span>
+        </dd>
+        <dt><span jhiTranslate="rmkproApp.costs.vatAmount">Vat Amount</span></dt>
+        <dd>
+          <span>{{ costs.vatAmount }}</span>
+        </dd>
+        <dt><span jhiTranslate="rmkproApp.costs.vatPercentage">Vat Percentage</span></dt>
+        <dd>
+          <span>{{ costs.vatPercentage }}</span>
+        </dd>
+        <dt><span jhiTranslate="rmkproApp.costs.netAmount">Net Amount</span></dt>
+        <dd>
+          <span>{{ costs.netAmount }}</span>
+        </dd>
+        <dt><span jhiTranslate="rmkproApp.costs.vehicle">Vehicle</span></dt>
+        <dd>
+          <div *ngIf="costs.vehicle">
+            <a [routerLink]="['/vehicle', costs.vehicle?.id, 'view']">{{ costs.vehicle?.id }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/costs', costs.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,30 @@
+{
+  "rmkproApp": {
+    "trim": {
+      "home": {
+        "title": "Trims",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Trim",
+        "createOrEditLabel": "Create or edit a Trim",
+        "notFound": "No Trims found"
+      },
+      "created": "A new Trim is created with identifier {{ param }}",
+      "updated": "A Trim is updated with identifier {{ param }}",
+      "deleted": "A Trim is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Trim {{ id }}?"
+      },
+      "detail": {
+        "title": "Trim"
+      },
+      "id": "ID",
+      "label": "Label",
+      "doors": "Doors",
+      "seats": "Seats",
+      "engineDisplacementCc": "Engine Displacement Cc",
+      "isAutomatic": "Is Automatic",
+      "fuelType": "Fuel Type",
+      "model": "Model"
+    }
+  }
+}

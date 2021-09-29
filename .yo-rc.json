@@ -27,7 +27,7 @@
     "devDatabaseType": "mysql",
     "prodDatabaseType": "mysql",
     "buildTool": "maven",
-    "serverSideOptions": ["messageBroker:kafka", "enableSwaggerCodegen:true"],
+    "serverSideOptions": ["enableSwaggerCodegen:true"],
     "websocket": false,
     "searchEngine": false,
     "messageBroker": "kafka",
@@ -42,7 +42,19 @@
     "devServerPort": 4200,
     "clientPackageManager": "npm",
     "languages": ["en", "fr", "ru", "es"],
-    "entities": ["LegalEntity", "Model", "Make", "Vehicle", "LegalEntityType"],
-    "lastLiquibaseTimestamp": 1632062858000
+    "entities": [
+      "LegalEntity",
+      "Model",
+      "Make",
+      "Vehicle",
+      "LegalEntityType",
+      "Person",
+      "Company",
+      "Colour",
+      "Trim",
+      "Costs",
+      "VehicleImages"
+    ],
+    "lastLiquibaseTimestamp": 1632945933000
   }
 }

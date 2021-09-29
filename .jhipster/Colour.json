@@ -1,0 +1,27 @@
+{
+  "name": "Colour",
+  "fields": [
+    {
+      "fieldName": "label",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "paintType",
+      "fieldType": "PaintType",
+      "fieldValues": "SOLID (Solid),METALLIC (Metallic),PEARLESCENT (Pearlescent),MATTE (Matte),SPECIAL (Special/Other)",
+      "fieldValidateRules": ["required"]
+    }
+  ],
+  "relationships": [],
+  "entityTableName": "colour",
+  "dto": "no",
+  "pagination": "no",
+  "service": "no",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "applications": "*",
+  "changelogDate": "20210929194728"
+}

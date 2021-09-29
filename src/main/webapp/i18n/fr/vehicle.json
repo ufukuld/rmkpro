@@ -20,8 +20,16 @@
       "id": "ID",
       "registrationNumber": "Registration Number",
       "firstRegistrationDate": "First Registration Date",
-      "make": "Make",
-      "owner": "Owner"
+      "status": "Status",
+      "mileage": "Mileage",
+      "reservePrice": "Reserve Price",
+      "proposedSalePrice": "Proposed Sale Price",
+      "netBookValue": "Net Book Value",
+      "images": "Images",
+      "costs": "Costs",
+      "trim": "Trim",
+      "owner": "Owner",
+      "colour": "Colour"
     }
   }
 }

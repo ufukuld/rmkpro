@@ -18,24 +18,92 @@
         </div>
 
         <div class="form-group">
-          <label class="form-control-label" jhiTranslate="rmkproApp.legalEntity.name" for="field_name">Name</label>
-          <input type="text" class="form-control" name="name" id="field_name" data-cy="name" formControlName="name" />
-          <div *ngIf="editForm.get('name')!.invalid && (editForm.get('name')!.dirty || editForm.get('name')!.touched)">
-            <small class="form-text text-danger" *ngIf="editForm.get('name')?.errors?.required" jhiTranslate="entity.validation.required">
+          <label class="form-control-label" jhiTranslate="rmkproApp.legalEntity.postCode" for="field_postCode">Post Code</label>
+          <input type="text" class="form-control" name="postCode" id="field_postCode" data-cy="postCode" formControlName="postCode" />
+          <div *ngIf="editForm.get('postCode')!.invalid && (editForm.get('postCode')!.dirty || editForm.get('postCode')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('postCode')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
               This field is required.
             </small>
           </div>
         </div>
 
         <div class="form-group">
+          <label class="form-control-label" jhiTranslate="rmkproApp.legalEntity.streetAddress" for="field_streetAddress"
+            >Street Address</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="streetAddress"
+            id="field_streetAddress"
+            data-cy="streetAddress"
+            formControlName="streetAddress"
+          />
+          <div
+            *ngIf="
+              editForm.get('streetAddress')!.invalid && (editForm.get('streetAddress')!.dirty || editForm.get('streetAddress')!.touched)
+            "
+          >
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('streetAddress')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="rmkproApp.legalEntity.email" for="field_email">Email</label>
+          <input type="text" class="form-control" name="email" id="field_email" data-cy="email" formControlName="email" />
+          <div *ngIf="editForm.get('email')!.invalid && (editForm.get('email')!.dirty || editForm.get('email')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('email')?.errors?.required" jhiTranslate="entity.validation.required">
+              This field is required.
+            </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="rmkproApp.legalEntity.phone" for="field_phone">Phone</label>
+          <input type="text" class="form-control" name="phone" id="field_phone" data-cy="phone" formControlName="phone" />
+        </div>
+
+        <div class="form-group">
           <label class="form-control-label" jhiTranslate="rmkproApp.legalEntity.type" for="field_type">Type</label>
-          <select class="form-control" id="field_type" data-cy="type" name="type" formControlName="type">
+          <select class="form-control" name="type" formControlName="type" id="field_type" data-cy="type">
+            <option [ngValue]="null">{{ 'rmkproApp.LegalEntityType.null' | translate }}</option>
+            <option value="PRIVATE_INDIVIDUAL">{{ 'rmkproApp.LegalEntityType.PRIVATE_INDIVIDUAL' | translate }}</option>
+            <option value="CORPORATION">{{ 'rmkproApp.LegalEntityType.CORPORATION' | translate }}</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="rmkproApp.legalEntity.person" for="field_person">Person</label>
+          <select class="form-control" id="field_person" data-cy="person" name="person" formControlName="person">
             <option [ngValue]="null"></option>
             <option
-              [ngValue]="legalEntityTypeOption.id === editForm.get('type')!.value?.id ? editForm.get('type')!.value : legalEntityTypeOption"
-              *ngFor="let legalEntityTypeOption of typesCollection; trackBy: trackLegalEntityTypeById"
+              [ngValue]="personOption.id === editForm.get('person')!.value?.id ? editForm.get('person')!.value : personOption"
+              *ngFor="let personOption of peopleCollection; trackBy: trackPersonById"
             >
-              {{ legalEntityTypeOption.id }}
+              {{ personOption.id }}
+            </option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="rmkproApp.legalEntity.company" for="field_company">Company</label>
+          <select class="form-control" id="field_company" data-cy="company" name="company" formControlName="company">
+            <option [ngValue]="null"></option>
+            <option
+              [ngValue]="companyOption.id === editForm.get('company')!.value?.id ? editForm.get('company')!.value : companyOption"
+              *ngFor="let companyOption of companiesCollection; trackBy: trackCompanyById"
+            >
+              {{ companyOption.id }}
             </option>
           </select>
         </div>

@@ -12,6 +12,12 @@
         "make": "Make",
         "vehicle": "Vehicle",
         "legalEntityType": "Legal Entity Type",
+        "person": "Person",
+        "company": "Company",
+        "colour": "Colour",
+        "trim": "Trim",
+        "costs": "Costs",
+        "vehicleImages": "Vehicle Images",
         "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
       },
       "account": {

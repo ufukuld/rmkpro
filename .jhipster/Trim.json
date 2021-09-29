@@ -1,0 +1,53 @@
+{
+  "name": "Trim",
+  "fields": [
+    {
+      "fieldName": "label",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "doors",
+      "fieldType": "Integer",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "seats",
+      "fieldType": "Integer",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "engineDisplacementCc",
+      "fieldType": "Integer",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "isAutomatic",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "fuelType",
+      "fieldType": "FuelType",
+      "fieldValues": "PETROL (Petrol),DIESEL (Diesel),PETROL_HYBRID (Petrol Hybrid),ELECTRIC (Electric)",
+      "fieldValidateRules": ["required"]
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "model",
+      "otherEntityRelationshipName": "trim",
+      "relationshipName": "model"
+    }
+  ],
+  "entityTableName": "trim",
+  "dto": "no",
+  "pagination": "no",
+  "service": "no",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "applications": "*",
+  "changelogDate": "20210929194729"
+}

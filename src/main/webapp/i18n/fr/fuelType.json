@@ -1,0 +1,11 @@
+{
+  "rmkproApp": {
+    "FuelType": {
+      "null": "",
+      "PETROL": "Petrol",
+      "DIESEL": "Diesel",
+      "PETROL_HYBRID": "Petrol Hybrid",
+      "ELECTRIC": "Electric"
+    }
+  }
+}

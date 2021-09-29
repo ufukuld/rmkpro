@@ -1,0 +1,84 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-costs-heading" data-cy="CostsCreateUpdateHeading" jhiTranslate="rmkproApp.costs.home.createOrEditLabel">
+        Create or edit a Costs
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="form-group" [hidden]="editForm.get('id')!.value == null">
+          <label class="form-control-label" jhiTranslate="global.field.id" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="rmkproApp.costs.detail" for="field_detail">Detail</label>
+          <input type="text" class="form-control" name="detail" id="field_detail" data-cy="detail" formControlName="detail" />
+          <div *ngIf="editForm.get('detail')!.invalid && (editForm.get('detail')!.dirty || editForm.get('detail')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('detail')?.errors?.required" jhiTranslate="entity.validation.required">
+              This field is required.
+            </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="rmkproApp.costs.unitPrice" for="field_unitPrice">Unit Price</label>
+          <input type="number" class="form-control" name="unitPrice" id="field_unitPrice" data-cy="unitPrice" formControlName="unitPrice" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="rmkproApp.costs.vatAmount" for="field_vatAmount">Vat Amount</label>
+          <input type="number" class="form-control" name="vatAmount" id="field_vatAmount" data-cy="vatAmount" formControlName="vatAmount" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="rmkproApp.costs.vatPercentage" for="field_vatPercentage">Vat Percentage</label>
+          <input
+            type="number"
+            class="form-control"
+            name="vatPercentage"
+            id="field_vatPercentage"
+            data-cy="vatPercentage"
+            formControlName="vatPercentage"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="rmkproApp.costs.netAmount" for="field_netAmount">Net Amount</label>
+          <input type="number" class="form-control" name="netAmount" id="field_netAmount" data-cy="netAmount" formControlName="netAmount" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="rmkproApp.costs.vehicle" for="field_vehicle">Vehicle</label>
+          <select class="form-control" id="field_vehicle" data-cy="vehicle" name="vehicle" formControlName="vehicle">
+            <option [ngValue]="null"></option>
+            <option
+              [ngValue]="vehicleOption.id === editForm.get('vehicle')!.value?.id ? editForm.get('vehicle')!.value : vehicleOption"
+              *ngFor="let vehicleOption of vehiclesSharedCollection; trackBy: trackVehicleById"
+            >
+              {{ vehicleOption.id }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

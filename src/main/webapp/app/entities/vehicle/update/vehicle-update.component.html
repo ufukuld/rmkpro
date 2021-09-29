@@ -79,14 +79,84 @@
         </div>
 
         <div class="form-group">
-          <label class="form-control-label" jhiTranslate="rmkproApp.vehicle.make" for="field_make">Make</label>
-          <select class="form-control" id="field_make" data-cy="make" name="make" formControlName="make">
+          <label class="form-control-label" jhiTranslate="rmkproApp.vehicle.status" for="field_status">Status</label>
+          <select class="form-control" name="status" formControlName="status" id="field_status" data-cy="status">
+            <option [ngValue]="null">{{ 'rmkproApp.VehicleStatus.null' | translate }}</option>
+            <option value="REQ_FOR_COLLECTION">{{ 'rmkproApp.VehicleStatus.REQ_FOR_COLLECTION' | translate }}</option>
+            <option value="COLLECTED">{{ 'rmkproApp.VehicleStatus.COLLECTED' | translate }}</option>
+            <option value="IN_AUCTION">{{ 'rmkproApp.VehicleStatus.IN_AUCTION' | translate }}</option>
+            <option value="SOLD">{{ 'rmkproApp.VehicleStatus.SOLD' | translate }}</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="rmkproApp.vehicle.mileage" for="field_mileage">Mileage</label>
+          <input type="number" class="form-control" name="mileage" id="field_mileage" data-cy="mileage" formControlName="mileage" />
+          <div *ngIf="editForm.get('mileage')!.invalid && (editForm.get('mileage')!.dirty || editForm.get('mileage')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('mileage')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+            <small
+              class="form-text text-danger"
+              [hidden]="!editForm.get('mileage')?.errors?.number"
+              jhiTranslate="entity.validation.number"
+            >
+              This field should be a number.
+            </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="rmkproApp.vehicle.reservePrice" for="field_reservePrice">Reserve Price</label>
+          <input
+            type="number"
+            class="form-control"
+            name="reservePrice"
+            id="field_reservePrice"
+            data-cy="reservePrice"
+            formControlName="reservePrice"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="rmkproApp.vehicle.proposedSalePrice" for="field_proposedSalePrice"
+            >Proposed Sale Price</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="proposedSalePrice"
+            id="field_proposedSalePrice"
+            data-cy="proposedSalePrice"
+            formControlName="proposedSalePrice"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="rmkproApp.vehicle.netBookValue" for="field_netBookValue">Net Book Value</label>
+          <input
+            type="number"
+            class="form-control"
+            name="netBookValue"
+            id="field_netBookValue"
+            data-cy="netBookValue"
+            formControlName="netBookValue"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="rmkproApp.vehicle.trim" for="field_trim">Trim</label>
+          <select class="form-control" id="field_trim" data-cy="trim" name="trim" formControlName="trim">
             <option [ngValue]="null"></option>
             <option
-              [ngValue]="makeOption.id === editForm.get('make')!.value?.id ? editForm.get('make')!.value : makeOption"
-              *ngFor="let makeOption of makesSharedCollection; trackBy: trackMakeById"
+              [ngValue]="trimOption.id === editForm.get('trim')!.value?.id ? editForm.get('trim')!.value : trimOption"
+              *ngFor="let trimOption of trimsSharedCollection; trackBy: trackTrimById"
             >
-              {{ makeOption.id }}
+              {{ trimOption.id }}
             </option>
           </select>
         </div>
@@ -100,6 +170,19 @@
               *ngFor="let legalEntityOption of legalEntitiesSharedCollection; trackBy: trackLegalEntityById"
             >
               {{ legalEntityOption.id }}
+            </option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="rmkproApp.vehicle.colour" for="field_colour">Colour</label>
+          <select class="form-control" id="field_colour" data-cy="colour" name="colour" formControlName="colour">
+            <option [ngValue]="null"></option>
+            <option
+              [ngValue]="colourOption.id === editForm.get('colour')!.value?.id ? editForm.get('colour')!.value : colourOption"
+              *ngFor="let colourOption of coloursSharedCollection; trackBy: trackColourById"
+            >
+              {{ colourOption.id }}
             </option>
           </select>
         </div>

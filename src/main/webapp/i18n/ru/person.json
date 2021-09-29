@@ -1,0 +1,26 @@
+{
+  "rmkproApp": {
+    "person": {
+      "home": {
+        "title": "People",
+        "refreshListLabel": "Обновить список",
+        "createLabel": "Создать новый Person",
+        "createOrEditLabel": "Создать или отредактировать Person",
+        "notFound": "People не найдено"
+      },
+      "created": "Новый Person создан с идентификатором {{ param }}",
+      "updated": "Person обновлен с идентификатором {{ param }}",
+      "deleted": "Person удален с идентификатором {{ param }}",
+      "delete": {
+        "question": "Вы уверены что хотите удалить Person {{ id }}?"
+      },
+      "detail": {
+        "title": "Person"
+      },
+      "id": "ID",
+      "title": "Title",
+      "firstNames": "First Names",
+      "surname": "Surname"
+    }
+  }
+}

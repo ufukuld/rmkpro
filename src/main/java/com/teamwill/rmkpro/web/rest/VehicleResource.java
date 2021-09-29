@@ -10,8 +10,8 @@ import java.util.Objects;
 import java.util.Optional;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
@@ -19,26 +19,19 @@ import org.springframework.web.bind.annotation.*;
 import tech.jhipster.web.util.HeaderUtil;
 import tech.jhipster.web.util.ResponseUtil;
 
-/**
- * REST controller for managing {@link com.teamwill.rmkpro.domain.Vehicle}.
- */
 @RestController
 @RequestMapping("/api")
 @Transactional
+@Slf4j
 public class VehicleResource {
-
-    private final Logger log = LoggerFactory.getLogger(VehicleResource.class);
 
     private static final String ENTITY_NAME = "vehicle";
 
     @Value("${jhipster.clientApp.name}")
     private String applicationName;
 
-    private final VehicleRepository vehicleRepository;
-
-    public VehicleResource(VehicleRepository vehicleRepository) {
-        this.vehicleRepository = vehicleRepository;
-    }
+    @Autowired
+    private VehicleRepository vehicleRepository;
 
     /**
      * {@code POST  /vehicles} : Create a new vehicle.
@@ -131,6 +124,21 @@ public class VehicleResource {
                     }
                     if (vehicle.getFirstRegistrationDate() != null) {
                         existingVehicle.setFirstRegistrationDate(vehicle.getFirstRegistrationDate());
+                    }
+                    if (vehicle.getStatus() != null) {
+                        existingVehicle.setStatus(vehicle.getStatus());
+                    }
+                    if (vehicle.getMileage() != null) {
+                        existingVehicle.setMileage(vehicle.getMileage());
+                    }
+                    if (vehicle.getReservePrice() != null) {
+                        existingVehicle.setReservePrice(vehicle.getReservePrice());
+                    }
+                    if (vehicle.getProposedSalePrice() != null) {
+                        existingVehicle.setProposedSalePrice(vehicle.getProposedSalePrice());
+                    }
+                    if (vehicle.getNetBookValue() != null) {
+                        existingVehicle.setNetBookValue(vehicle.getNetBookValue());
                     }
 
                     return existingVehicle;

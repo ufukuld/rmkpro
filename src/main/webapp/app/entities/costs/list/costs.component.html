@@ -1,0 +1,82 @@
+<div>
+  <h2 id="page-heading" data-cy="CostsHeading">
+    <span jhiTranslate="rmkproApp.costs.home.title">Costs</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info mr-2" (click)="loadAll()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span jhiTranslate="rmkproApp.costs.home.refreshListLabel">Refresh List</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-costs"
+        [routerLink]="['/costs/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="rmkproApp.costs.home.createLabel"> Create a new Costs </span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="costs?.length === 0">
+    <span jhiTranslate="rmkproApp.costs.home.notFound">No costs found</span>
+  </div>
+
+  <div class="table-responsive" id="entities" *ngIf="costs && costs.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr>
+          <th scope="col"><span jhiTranslate="global.field.id">ID</span></th>
+          <th scope="col"><span jhiTranslate="rmkproApp.costs.detail">Detail</span></th>
+          <th scope="col"><span jhiTranslate="rmkproApp.costs.unitPrice">Unit Price</span></th>
+          <th scope="col"><span jhiTranslate="rmkproApp.costs.vatAmount">Vat Amount</span></th>
+          <th scope="col"><span jhiTranslate="rmkproApp.costs.vatPercentage">Vat Percentage</span></th>
+          <th scope="col"><span jhiTranslate="rmkproApp.costs.netAmount">Net Amount</span></th>
+          <th scope="col"><span jhiTranslate="rmkproApp.costs.vehicle">Vehicle</span></th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let costs of costs; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/costs', costs.id, 'view']">{{ costs.id }}</a>
+          </td>
+          <td>{{ costs.detail }}</td>
+          <td>{{ costs.unitPrice }}</td>
+          <td>{{ costs.vatAmount }}</td>
+          <td>{{ costs.vatPercentage }}</td>
+          <td>{{ costs.netAmount }}</td>
+          <td>
+            <div *ngIf="costs.vehicle">
+              <a [routerLink]="['/vehicle', costs.vehicle?.id, 'view']">{{ costs.vehicle?.id }}</a>
+            </div>
+          </td>
+          <td class="text-right">
+            <div class="btn-group">
+              <button type="submit" [routerLink]="['/costs', costs.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+              </button>
+
+              <button type="submit" [routerLink]="['/costs', costs.id, 'edit']" class="btn btn-primary btn-sm" data-cy="entityEditButton">
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(costs)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

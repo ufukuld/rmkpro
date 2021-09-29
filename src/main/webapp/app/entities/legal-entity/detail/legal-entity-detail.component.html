@@ -14,14 +14,36 @@
         <dd>
           <span>{{ legalEntity.id }}</span>
         </dd>
-        <dt><span jhiTranslate="rmkproApp.legalEntity.name">Name</span></dt>
+        <dt><span jhiTranslate="rmkproApp.legalEntity.postCode">Post Code</span></dt>
         <dd>
-          <span>{{ legalEntity.name }}</span>
+          <span>{{ legalEntity.postCode }}</span>
+        </dd>
+        <dt><span jhiTranslate="rmkproApp.legalEntity.streetAddress">Street Address</span></dt>
+        <dd>
+          <span>{{ legalEntity.streetAddress }}</span>
+        </dd>
+        <dt><span jhiTranslate="rmkproApp.legalEntity.email">Email</span></dt>
+        <dd>
+          <span>{{ legalEntity.email }}</span>
+        </dd>
+        <dt><span jhiTranslate="rmkproApp.legalEntity.phone">Phone</span></dt>
+        <dd>
+          <span>{{ legalEntity.phone }}</span>
         </dd>
         <dt><span jhiTranslate="rmkproApp.legalEntity.type">Type</span></dt>
         <dd>
-          <div *ngIf="legalEntity.type">
-            <a [routerLink]="['/legal-entity-type', legalEntity.type?.id, 'view']">{{ legalEntity.type?.id }}</a>
+          <span jhiTranslate="{{ 'rmkproApp.LegalEntityType.' + legalEntity.type }}">{{ legalEntity.type }}</span>
+        </dd>
+        <dt><span jhiTranslate="rmkproApp.legalEntity.person">Person</span></dt>
+        <dd>
+          <div *ngIf="legalEntity.person">
+            <a [routerLink]="['/person', legalEntity.person?.id, 'view']">{{ legalEntity.person?.id }}</a>
+          </div>
+        </dd>
+        <dt><span jhiTranslate="rmkproApp.legalEntity.company">Company</span></dt>
+        <dd>
+          <div *ngIf="legalEntity.company">
+            <a [routerLink]="['/company', legalEntity.company?.id, 'view']">{{ legalEntity.company?.id }}</a>
           </div>
         </dd>
       </dl>

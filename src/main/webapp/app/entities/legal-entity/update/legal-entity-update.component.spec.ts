@@ -9,8 +9,10 @@ import { of, Subject } from 'rxjs';
 
 import { LegalEntityService } from '../service/legal-entity.service';
 import { ILegalEntity, LegalEntity } from '../legal-entity.model';
-import { ILegalEntityType } from 'app/entities/legal-entity-type/legal-entity-type.model';
-import { LegalEntityTypeService } from 'app/entities/legal-entity-type/service/legal-entity-type.service';
+import { IPerson } from 'app/entities/person/person.model';
+import { PersonService } from 'app/entities/person/service/person.service';
+import { ICompany } from 'app/entities/company/company.model';
+import { CompanyService } from 'app/entities/company/service/company.service';
 
 import { LegalEntityUpdateComponent } from './legal-entity-update.component';
 
@@ -20,7 +22,8 @@ describe('Component Tests', () => {
     let fixture: ComponentFixture<LegalEntityUpdateComponent>;
     let activatedRoute: ActivatedRoute;
     let legalEntityService: LegalEntityService;
-    let legalEntityTypeService: LegalEntityTypeService;
+    let personService: PersonService;
+    let companyService: CompanyService;
 
     beforeEach(() => {
       TestBed.configureTestingModule({
@@ -34,40 +37,62 @@ describe('Component Tests', () => {
       fixture = TestBed.createComponent(LegalEntityUpdateComponent);
       activatedRoute = TestBed.inject(ActivatedRoute);
       legalEntityService = TestBed.inject(LegalEntityService);
-      legalEntityTypeService = TestBed.inject(LegalEntityTypeService);
+      personService = TestBed.inject(PersonService);
+      companyService = TestBed.inject(CompanyService);
 
       comp = fixture.componentInstance;
     });
 
     describe('ngOnInit', () => {
-      it('Should call type query and add missing value', () => {
+      it('Should call person query and add missing value', () => {
         const legalEntity: ILegalEntity = { id: 456 };
-        const type: ILegalEntityType = { id: 48834 };
-        legalEntity.type = type;
+        const person: IPerson = { id: 30413 };
+        legalEntity.person = person;
 
-        const typeCollection: ILegalEntityType[] = [{ id: 22379 }];
-        jest.spyOn(legalEntityTypeService, 'query').mockReturnValue(of(new HttpResponse({ body: typeCollection })));
-        const expectedCollection: ILegalEntityType[] = [type, ...typeCollection];
-        jest.spyOn(legalEntityTypeService, 'addLegalEntityTypeToCollectionIfMissing').mockReturnValue(expectedCollection);
+        const personCollection: IPerson[] = [{ id: 14338 }];
+        jest.spyOn(personService, 'query').mockReturnValue(of(new HttpResponse({ body: personCollection })));
+        const expectedCollection: IPerson[] = [person, ...personCollection];
+        jest.spyOn(personService, 'addPersonToCollectionIfMissing').mockReturnValue(expectedCollection);
 
         activatedRoute.data = of({ legalEntity });
         comp.ngOnInit();
 
-        expect(legalEntityTypeService.query).toHaveBeenCalled();
-        expect(legalEntityTypeService.addLegalEntityTypeToCollectionIfMissing).toHaveBeenCalledWith(typeCollection, type);
-        expect(comp.typesCollection).toEqual(expectedCollection);
+        expect(personService.query).toHaveBeenCalled();
+        expect(personService.addPersonToCollectionIfMissing).toHaveBeenCalledWith(personCollection, person);
+        expect(comp.peopleCollection).toEqual(expectedCollection);
+      });
+
+      it('Should call company query and add missing value', () => {
+        const legalEntity: ILegalEntity = { id: 456 };
+        const company: ICompany = { id: 3903 };
+        legalEntity.company = company;
+
+        const companyCollection: ICompany[] = [{ id: 7834 }];
+        jest.spyOn(companyService, 'query').mockReturnValue(of(new HttpResponse({ body: companyCollection })));
+        const expectedCollection: ICompany[] = [company, ...companyCollection];
+        jest.spyOn(companyService, 'addCompanyToCollectionIfMissing').mockReturnValue(expectedCollection);
+
+        activatedRoute.data = of({ legalEntity });
+        comp.ngOnInit();
+
+        expect(companyService.query).toHaveBeenCalled();
+        expect(companyService.addCompanyToCollectionIfMissing).toHaveBeenCalledWith(companyCollection, company);
+        expect(comp.companiesCollection).toEqual(expectedCollection);
       });
 
       it('Should update editForm', () => {
         const legalEntity: ILegalEntity = { id: 456 };
-        const type: ILegalEntityType = { id: 70621 };
-        legalEntity.type = type;
+        const person: IPerson = { id: 71153 };
+        legalEntity.person = person;
+        const company: ICompany = { id: 89483 };
+        legalEntity.company = company;
 
         activatedRoute.data = of({ legalEntity });
         comp.ngOnInit();
 
         expect(comp.editForm.value).toEqual(expect.objectContaining(legalEntity));
-        expect(comp.typesCollection).toContain(type);
+        expect(comp.peopleCollection).toContain(person);
+        expect(comp.companiesCollection).toContain(company);
       });
     });
 
@@ -136,10 +161,18 @@ describe('Component Tests', () => {
     });
 
     describe('Tracking relationships identifiers', () => {
-      describe('trackLegalEntityTypeById', () => {
-        it('Should return tracked LegalEntityType primary key', () => {
+      describe('trackPersonById', () => {
+        it('Should return tracked Person primary key', () => {
           const entity = { id: 123 };
-          const trackResult = comp.trackLegalEntityTypeById(0, entity);
+          const trackResult = comp.trackPersonById(0, entity);
+          expect(trackResult).toEqual(entity.id);
+        });
+      });
+
+      describe('trackCompanyById', () => {
+        it('Should return tracked Company primary key', () => {
+          const entity = { id: 123 };
+          const trackResult = comp.trackCompanyById(0, entity);
           expect(trackResult).toEqual(entity.id);
         });
       });

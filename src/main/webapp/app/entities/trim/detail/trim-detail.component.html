@@ -1,0 +1,58 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div *ngIf="trim">
+      <h2 data-cy="trimDetailsHeading"><span jhiTranslate="rmkproApp.trim.detail.title">Trim</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ trim.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="rmkproApp.trim.label">Label</span></dt>
+        <dd>
+          <span>{{ trim.label }}</span>
+        </dd>
+        <dt><span jhiTranslate="rmkproApp.trim.doors">Doors</span></dt>
+        <dd>
+          <span>{{ trim.doors }}</span>
+        </dd>
+        <dt><span jhiTranslate="rmkproApp.trim.seats">Seats</span></dt>
+        <dd>
+          <span>{{ trim.seats }}</span>
+        </dd>
+        <dt><span jhiTranslate="rmkproApp.trim.engineDisplacementCc">Engine Displacement Cc</span></dt>
+        <dd>
+          <span>{{ trim.engineDisplacementCc }}</span>
+        </dd>
+        <dt><span jhiTranslate="rmkproApp.trim.isAutomatic">Is Automatic</span></dt>
+        <dd>
+          <span>{{ trim.isAutomatic }}</span>
+        </dd>
+        <dt><span jhiTranslate="rmkproApp.trim.fuelType">Fuel Type</span></dt>
+        <dd>
+          <span jhiTranslate="{{ 'rmkproApp.FuelType.' + trim.fuelType }}">{{ trim.fuelType }}</span>
+        </dd>
+        <dt><span jhiTranslate="rmkproApp.trim.model">Model</span></dt>
+        <dd>
+          <div *ngIf="trim.model">
+            <a [routerLink]="['/model', trim.model?.id, 'view']">{{ trim.model?.id }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/trim', trim.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

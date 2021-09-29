@@ -7,8 +7,10 @@ import { finalize, map } from 'rxjs/operators';
 
 import { ILegalEntity, LegalEntity } from '../legal-entity.model';
 import { LegalEntityService } from '../service/legal-entity.service';
-import { ILegalEntityType } from 'app/entities/legal-entity-type/legal-entity-type.model';
-import { LegalEntityTypeService } from 'app/entities/legal-entity-type/service/legal-entity-type.service';
+import { IPerson } from 'app/entities/person/person.model';
+import { PersonService } from 'app/entities/person/service/person.service';
+import { ICompany } from 'app/entities/company/company.model';
+import { CompanyService } from 'app/entities/company/service/company.service';
 
 @Component({
   selector: 'jhi-legal-entity-update',
@@ -17,17 +19,24 @@ import { LegalEntityTypeService } from 'app/entities/legal-entity-type/service/l
 export class LegalEntityUpdateComponent implements OnInit {
   isSaving = false;
 
-  typesCollection: ILegalEntityType[] = [];
+  peopleCollection: IPerson[] = [];
+  companiesCollection: ICompany[] = [];
 
   editForm = this.fb.group({
     id: [],
-    name: [null, [Validators.required]],
+    postCode: [null, [Validators.required]],
+    streetAddress: [null, [Validators.required]],
+    email: [null, [Validators.required]],
+    phone: [],
     type: [],
+    person: [],
+    company: [],
   });
 
   constructor(
     protected legalEntityService: LegalEntityService,
-    protected legalEntityTypeService: LegalEntityTypeService,
+    protected personService: PersonService,
+    protected companyService: CompanyService,
     protected activatedRoute: ActivatedRoute,
     protected fb: FormBuilder
   ) {}
@@ -54,7 +63,11 @@ export class LegalEntityUpdateComponent implements OnInit {
     }
   }
 
-  trackLegalEntityTypeById(index: number, item: ILegalEntityType): number {
+  trackPersonById(index: number, item: IPerson): number {
+    return item.id!;
+  }
+
+  trackCompanyById(index: number, item: ICompany): number {
     return item.id!;
   }
 
@@ -80,31 +93,46 @@ export class LegalEntityUpdateComponent implements OnInit {
   protected updateForm(legalEntity: ILegalEntity): void {
     this.editForm.patchValue({
       id: legalEntity.id,
-      name: legalEntity.name,
+      postCode: legalEntity.postCode,
+      streetAddress: legalEntity.streetAddress,
+      email: legalEntity.email,
+      phone: legalEntity.phone,
       type: legalEntity.type,
+      person: legalEntity.person,
+      company: legalEntity.company,
     });
 
-    this.typesCollection = this.legalEntityTypeService.addLegalEntityTypeToCollectionIfMissing(this.typesCollection, legalEntity.type);
+    this.peopleCollection = this.personService.addPersonToCollectionIfMissing(this.peopleCollection, legalEntity.person);
+    this.companiesCollection = this.companyService.addCompanyToCollectionIfMissing(this.companiesCollection, legalEntity.company);
   }
 
   protected loadRelationshipsOptions(): void {
-    this.legalEntityTypeService
+    this.personService
       .query({ filter: 'legalentity-is-null' })
-      .pipe(map((res: HttpResponse<ILegalEntityType[]>) => res.body ?? []))
+      .pipe(map((res: HttpResponse<IPerson[]>) => res.body ?? []))
+      .pipe(map((people: IPerson[]) => this.personService.addPersonToCollectionIfMissing(people, this.editForm.get('person')!.value)))
+      .subscribe((people: IPerson[]) => (this.peopleCollection = people));
+
+    this.companyService
+      .query({ filter: 'legalentity-is-null' })
+      .pipe(map((res: HttpResponse<ICompany[]>) => res.body ?? []))
       .pipe(
-        map((legalEntityTypes: ILegalEntityType[]) =>
-          this.legalEntityTypeService.addLegalEntityTypeToCollectionIfMissing(legalEntityTypes, this.editForm.get('type')!.value)
-        )
+        map((companies: ICompany[]) => this.companyService.addCompanyToCollectionIfMissing(companies, this.editForm.get('company')!.value))
       )
-      .subscribe((legalEntityTypes: ILegalEntityType[]) => (this.typesCollection = legalEntityTypes));
+      .subscribe((companies: ICompany[]) => (this.companiesCollection = companies));
   }
 
   protected createFromForm(): ILegalEntity {
     return {
       ...new LegalEntity(),
       id: this.editForm.get(['id'])!.value,
-      name: this.editForm.get(['name'])!.value,
+      postCode: this.editForm.get(['postCode'])!.value,
+      streetAddress: this.editForm.get(['streetAddress'])!.value,
+      email: this.editForm.get(['email'])!.value,
+      phone: this.editForm.get(['phone'])!.value,
       type: this.editForm.get(['type'])!.value,
+      person: this.editForm.get(['person'])!.value,
+      company: this.editForm.get(['company'])!.value,
     };
   }
 }

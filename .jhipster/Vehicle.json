@@ -10,20 +10,60 @@
       "fieldName": "firstRegistrationDate",
       "fieldType": "LocalDate",
       "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "status",
+      "fieldType": "VehicleStatus",
+      "fieldValues": "REQ_FOR_COLLECTION (Collection Requested),COLLECTED (Collected),IN_AUCTION (In Auction),SOLD (Sold)"
+    },
+    {
+      "fieldName": "mileage",
+      "fieldType": "Integer",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "reservePrice",
+      "fieldType": "BigDecimal"
+    },
+    {
+      "fieldName": "proposedSalePrice",
+      "fieldType": "BigDecimal"
+    },
+    {
+      "fieldName": "netBookValue",
+      "fieldType": "BigDecimal"
     }
   ],
   "relationships": [
     {
-      "relationshipType": "many-to-one",
-      "otherEntityName": "make",
+      "relationshipType": "one-to-many",
+      "otherEntityName": "vehicleImages",
       "otherEntityRelationshipName": "vehicle",
-      "relationshipName": "make"
+      "relationshipName": "images"
+    },
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "costs",
+      "otherEntityRelationshipName": "vehicle",
+      "relationshipName": "costs"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "trim",
+      "otherEntityRelationshipName": "vehicle",
+      "relationshipName": "trim"
     },
     {
       "relationshipType": "many-to-one",
       "otherEntityName": "legalEntity",
       "otherEntityRelationshipName": "vehicle",
       "relationshipName": "owner"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "colour",
+      "otherEntityRelationshipName": "vehicle",
+      "relationshipName": "colour"
     }
   ],
   "entityTableName": "vehicle",

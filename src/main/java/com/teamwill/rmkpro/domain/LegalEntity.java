@@ -1,5 +1,7 @@
 package com.teamwill.rmkpro.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.teamwill.rmkpro.domain.enumeration.LegalEntityType;
 import java.io.Serializable;
 import javax.persistence.*;
 import javax.validation.constraints.*;
@@ -21,12 +23,32 @@ public class LegalEntity implements Serializable {
     private Long id;
 
     @NotNull
-    @Column(name = "name", nullable = false)
-    private String name;
+    @Column(name = "post_code", nullable = false)
+    private String postCode;
+
+    @NotNull
+    @Column(name = "street_address", nullable = false)
+    private String streetAddress;
+
+    @NotNull
+    @Column(name = "email", nullable = false)
+    private String email;
+
+    @Column(name = "phone")
+    private String phone;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "type")
+    private LegalEntityType type;
 
     @OneToOne
     @JoinColumn(unique = true)
-    private LegalEntityType type;
+    private Person person;
+
+    @JsonIgnoreProperties(value = { "contactPerson" }, allowSetters = true)
+    @OneToOne
+    @JoinColumn(unique = true)
+    private Company company;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
     public Long getId() {
@@ -42,30 +64,95 @@ public class LegalEntity implements Serializable {
         return this;
     }
 
-    public String getName() {
-        return this.name;
+    public String getPostCode() {
+        return this.postCode;
     }
 
-    public LegalEntity name(String name) {
-        this.name = name;
+    public LegalEntity postCode(String postCode) {
+        this.postCode = postCode;
         return this;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setPostCode(String postCode) {
+        this.postCode = postCode;
+    }
+
+    public String getStreetAddress() {
+        return this.streetAddress;
+    }
+
+    public LegalEntity streetAddress(String streetAddress) {
+        this.streetAddress = streetAddress;
+        return this;
+    }
+
+    public void setStreetAddress(String streetAddress) {
+        this.streetAddress = streetAddress;
+    }
+
+    public String getEmail() {
+        return this.email;
+    }
+
+    public LegalEntity email(String email) {
+        this.email = email;
+        return this;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getPhone() {
+        return this.phone;
+    }
+
+    public LegalEntity phone(String phone) {
+        this.phone = phone;
+        return this;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 
     public LegalEntityType getType() {
         return this.type;
     }
 
-    public LegalEntity type(LegalEntityType legalEntityType) {
-        this.setType(legalEntityType);
+    public LegalEntity type(LegalEntityType type) {
+        this.type = type;
         return this;
     }
 
-    public void setType(LegalEntityType legalEntityType) {
-        this.type = legalEntityType;
+    public void setType(LegalEntityType type) {
+        this.type = type;
+    }
+
+    public Person getPerson() {
+        return this.person;
+    }
+
+    public LegalEntity person(Person person) {
+        this.setPerson(person);
+        return this;
+    }
+
+    public void setPerson(Person person) {
+        this.person = person;
+    }
+
+    public Company getCompany() {
+        return this.company;
+    }
+
+    public LegalEntity company(Company company) {
+        this.setCompany(company);
+        return this;
+    }
+
+    public void setCompany(Company company) {
+        this.company = company;
     }
 
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
@@ -92,7 +179,11 @@ public class LegalEntity implements Serializable {
     public String toString() {
         return "LegalEntity{" +
             "id=" + getId() +
-            ", name='" + getName() + "'" +
+            ", postCode='" + getPostCode() + "'" +
+            ", streetAddress='" + getStreetAddress() + "'" +
+            ", email='" + getEmail() + "'" +
+            ", phone='" + getPhone() + "'" +
+            ", type='" + getType() + "'" +
             "}";
     }
 }

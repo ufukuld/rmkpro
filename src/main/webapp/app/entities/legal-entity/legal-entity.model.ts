@@ -1,13 +1,29 @@
-import { ILegalEntityType } from 'app/entities/legal-entity-type/legal-entity-type.model';
+import { IPerson } from 'app/entities/person/person.model';
+import { ICompany } from 'app/entities/company/company.model';
+import { LegalEntityType } from 'app/entities/enumerations/legal-entity-type.model';
 
 export interface ILegalEntity {
   id?: number;
-  name?: string;
-  type?: ILegalEntityType | null;
+  postCode?: string;
+  streetAddress?: string;
+  email?: string;
+  phone?: string | null;
+  type?: LegalEntityType | null;
+  person?: IPerson | null;
+  company?: ICompany | null;
 }
 
 export class LegalEntity implements ILegalEntity {
-  constructor(public id?: number, public name?: string, public type?: ILegalEntityType | null) {}
+  constructor(
+    public id?: number,
+    public postCode?: string,
+    public streetAddress?: string,
+    public email?: string,
+    public phone?: string | null,
+    public type?: LegalEntityType | null,
+    public person?: IPerson | null,
+    public company?: ICompany | null
+  ) {}
 }
 
 export function getLegalEntityIdentifier(legalEntity: ILegalEntity): number | undefined {

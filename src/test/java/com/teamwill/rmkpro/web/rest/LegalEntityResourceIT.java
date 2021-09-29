@@ -8,6 +8,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 import com.teamwill.rmkpro.IntegrationTest;
 import com.teamwill.rmkpro.domain.LegalEntity;
+import com.teamwill.rmkpro.domain.enumeration.LegalEntityType;
 import com.teamwill.rmkpro.repository.LegalEntityRepository;
 import java.util.List;
 import java.util.Random;
@@ -30,8 +31,20 @@ import org.springframework.transaction.annotation.Transactional;
 @WithMockUser
 class LegalEntityResourceIT {
 
-    private static final String DEFAULT_NAME = "AAAAAAAAAA";
-    private static final String UPDATED_NAME = "BBBBBBBBBB";
+    private static final String DEFAULT_POST_CODE = "AAAAAAAAAA";
+    private static final String UPDATED_POST_CODE = "BBBBBBBBBB";
+
+    private static final String DEFAULT_STREET_ADDRESS = "AAAAAAAAAA";
+    private static final String UPDATED_STREET_ADDRESS = "BBBBBBBBBB";
+
+    private static final String DEFAULT_EMAIL = "AAAAAAAAAA";
+    private static final String UPDATED_EMAIL = "BBBBBBBBBB";
+
+    private static final String DEFAULT_PHONE = "AAAAAAAAAA";
+    private static final String UPDATED_PHONE = "BBBBBBBBBB";
+
+    private static final LegalEntityType DEFAULT_TYPE = LegalEntityType.PRIVATE_INDIVIDUAL;
+    private static final LegalEntityType UPDATED_TYPE = LegalEntityType.CORPORATION;
 
     private static final String ENTITY_API_URL = "/api/legal-entities";
     private static final String ENTITY_API_URL_ID = ENTITY_API_URL + "/{id}";
@@ -57,7 +70,12 @@ class LegalEntityResourceIT {
      * if they test an entity which requires the current entity.
      */
     public static LegalEntity createEntity(EntityManager em) {
-        LegalEntity legalEntity = new LegalEntity().name(DEFAULT_NAME);
+        LegalEntity legalEntity = new LegalEntity()
+            .postCode(DEFAULT_POST_CODE)
+            .streetAddress(DEFAULT_STREET_ADDRESS)
+            .email(DEFAULT_EMAIL)
+            .phone(DEFAULT_PHONE)
+            .type(DEFAULT_TYPE);
         return legalEntity;
     }
 
@@ -68,7 +86,12 @@ class LegalEntityResourceIT {
      * if they test an entity which requires the current entity.
      */
     public static LegalEntity createUpdatedEntity(EntityManager em) {
-        LegalEntity legalEntity = new LegalEntity().name(UPDATED_NAME);
+        LegalEntity legalEntity = new LegalEntity()
+            .postCode(UPDATED_POST_CODE)
+            .streetAddress(UPDATED_STREET_ADDRESS)
+            .email(UPDATED_EMAIL)
+            .phone(UPDATED_PHONE)
+            .type(UPDATED_TYPE);
         return legalEntity;
     }
 
@@ -95,7 +118,11 @@ class LegalEntityResourceIT {
         List<LegalEntity> legalEntityList = legalEntityRepository.findAll();
         assertThat(legalEntityList).hasSize(databaseSizeBeforeCreate + 1);
         LegalEntity testLegalEntity = legalEntityList.get(legalEntityList.size() - 1);
-        assertThat(testLegalEntity.getName()).isEqualTo(DEFAULT_NAME);
+        assertThat(testLegalEntity.getPostCode()).isEqualTo(DEFAULT_POST_CODE);
+        assertThat(testLegalEntity.getStreetAddress()).isEqualTo(DEFAULT_STREET_ADDRESS);
+        assertThat(testLegalEntity.getEmail()).isEqualTo(DEFAULT_EMAIL);
+        assertThat(testLegalEntity.getPhone()).isEqualTo(DEFAULT_PHONE);
+        assertThat(testLegalEntity.getType()).isEqualTo(DEFAULT_TYPE);
     }
 
     @Test
@@ -123,10 +150,54 @@ class LegalEntityResourceIT {
 
     @Test
     @Transactional
-    void checkNameIsRequired() throws Exception {
+    void checkPostCodeIsRequired() throws Exception {
         int databaseSizeBeforeTest = legalEntityRepository.findAll().size();
         // set the field null
-        legalEntity.setName(null);
+        legalEntity.setPostCode(null);
+
+        // Create the LegalEntity, which fails.
+
+        restLegalEntityMockMvc
+            .perform(
+                post(ENTITY_API_URL)
+                    .with(csrf())
+                    .contentType(MediaType.APPLICATION_JSON)
+                    .content(TestUtil.convertObjectToJsonBytes(legalEntity))
+            )
+            .andExpect(status().isBadRequest());
+
+        List<LegalEntity> legalEntityList = legalEntityRepository.findAll();
+        assertThat(legalEntityList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
+    void checkStreetAddressIsRequired() throws Exception {
+        int databaseSizeBeforeTest = legalEntityRepository.findAll().size();
+        // set the field null
+        legalEntity.setStreetAddress(null);
+
+        // Create the LegalEntity, which fails.
+
+        restLegalEntityMockMvc
+            .perform(
+                post(ENTITY_API_URL)
+                    .with(csrf())
+                    .contentType(MediaType.APPLICATION_JSON)
+                    .content(TestUtil.convertObjectToJsonBytes(legalEntity))
+            )
+            .andExpect(status().isBadRequest());
+
+        List<LegalEntity> legalEntityList = legalEntityRepository.findAll();
+        assertThat(legalEntityList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
+    void checkEmailIsRequired() throws Exception {
+        int databaseSizeBeforeTest = legalEntityRepository.findAll().size();
+        // set the field null
+        legalEntity.setEmail(null);
 
         // Create the LegalEntity, which fails.
 
@@ -155,7 +226,11 @@ class LegalEntityResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(legalEntity.getId().intValue())))
-            .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME)));
+            .andExpect(jsonPath("$.[*].postCode").value(hasItem(DEFAULT_POST_CODE)))
+            .andExpect(jsonPath("$.[*].streetAddress").value(hasItem(DEFAULT_STREET_ADDRESS)))
+            .andExpect(jsonPath("$.[*].email").value(hasItem(DEFAULT_EMAIL)))
+            .andExpect(jsonPath("$.[*].phone").value(hasItem(DEFAULT_PHONE)))
+            .andExpect(jsonPath("$.[*].type").value(hasItem(DEFAULT_TYPE.toString())));
     }
 
     @Test
@@ -170,7 +245,11 @@ class LegalEntityResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.id").value(legalEntity.getId().intValue()))
-            .andExpect(jsonPath("$.name").value(DEFAULT_NAME));
+            .andExpect(jsonPath("$.postCode").value(DEFAULT_POST_CODE))
+            .andExpect(jsonPath("$.streetAddress").value(DEFAULT_STREET_ADDRESS))
+            .andExpect(jsonPath("$.email").value(DEFAULT_EMAIL))
+            .andExpect(jsonPath("$.phone").value(DEFAULT_PHONE))
+            .andExpect(jsonPath("$.type").value(DEFAULT_TYPE.toString()));
     }
 
     @Test
@@ -192,7 +271,12 @@ class LegalEntityResourceIT {
         LegalEntity updatedLegalEntity = legalEntityRepository.findById(legalEntity.getId()).get();
         // Disconnect from session so that the updates on updatedLegalEntity are not directly saved in db
         em.detach(updatedLegalEntity);
-        updatedLegalEntity.name(UPDATED_NAME);
+        updatedLegalEntity
+            .postCode(UPDATED_POST_CODE)
+            .streetAddress(UPDATED_STREET_ADDRESS)
+            .email(UPDATED_EMAIL)
+            .phone(UPDATED_PHONE)
+            .type(UPDATED_TYPE);
 
         restLegalEntityMockMvc
             .perform(
@@ -207,7 +291,11 @@ class LegalEntityResourceIT {
         List<LegalEntity> legalEntityList = legalEntityRepository.findAll();
         assertThat(legalEntityList).hasSize(databaseSizeBeforeUpdate);
         LegalEntity testLegalEntity = legalEntityList.get(legalEntityList.size() - 1);
-        assertThat(testLegalEntity.getName()).isEqualTo(UPDATED_NAME);
+        assertThat(testLegalEntity.getPostCode()).isEqualTo(UPDATED_POST_CODE);
+        assertThat(testLegalEntity.getStreetAddress()).isEqualTo(UPDATED_STREET_ADDRESS);
+        assertThat(testLegalEntity.getEmail()).isEqualTo(UPDATED_EMAIL);
+        assertThat(testLegalEntity.getPhone()).isEqualTo(UPDATED_PHONE);
+        assertThat(testLegalEntity.getType()).isEqualTo(UPDATED_TYPE);
     }
 
     @Test
@@ -285,7 +373,11 @@ class LegalEntityResourceIT {
         LegalEntity partialUpdatedLegalEntity = new LegalEntity();
         partialUpdatedLegalEntity.setId(legalEntity.getId());
 
-        partialUpdatedLegalEntity.name(UPDATED_NAME);
+        partialUpdatedLegalEntity
+            .postCode(UPDATED_POST_CODE)
+            .streetAddress(UPDATED_STREET_ADDRESS)
+            .email(UPDATED_EMAIL)
+            .phone(UPDATED_PHONE);
 
         restLegalEntityMockMvc
             .perform(
@@ -300,7 +392,11 @@ class LegalEntityResourceIT {
         List<LegalEntity> legalEntityList = legalEntityRepository.findAll();
         assertThat(legalEntityList).hasSize(databaseSizeBeforeUpdate);
         LegalEntity testLegalEntity = legalEntityList.get(legalEntityList.size() - 1);
-        assertThat(testLegalEntity.getName()).isEqualTo(UPDATED_NAME);
+        assertThat(testLegalEntity.getPostCode()).isEqualTo(UPDATED_POST_CODE);
+        assertThat(testLegalEntity.getStreetAddress()).isEqualTo(UPDATED_STREET_ADDRESS);
+        assertThat(testLegalEntity.getEmail()).isEqualTo(UPDATED_EMAIL);
+        assertThat(testLegalEntity.getPhone()).isEqualTo(UPDATED_PHONE);
+        assertThat(testLegalEntity.getType()).isEqualTo(DEFAULT_TYPE);
     }
 
     @Test
@@ -315,7 +411,12 @@ class LegalEntityResourceIT {
         LegalEntity partialUpdatedLegalEntity = new LegalEntity();
         partialUpdatedLegalEntity.setId(legalEntity.getId());
 
-        partialUpdatedLegalEntity.name(UPDATED_NAME);
+        partialUpdatedLegalEntity
+            .postCode(UPDATED_POST_CODE)
+            .streetAddress(UPDATED_STREET_ADDRESS)
+            .email(UPDATED_EMAIL)
+            .phone(UPDATED_PHONE)
+            .type(UPDATED_TYPE);
 
         restLegalEntityMockMvc
             .perform(
@@ -330,7 +431,11 @@ class LegalEntityResourceIT {
         List<LegalEntity> legalEntityList = legalEntityRepository.findAll();
         assertThat(legalEntityList).hasSize(databaseSizeBeforeUpdate);
         LegalEntity testLegalEntity = legalEntityList.get(legalEntityList.size() - 1);
-        assertThat(testLegalEntity.getName()).isEqualTo(UPDATED_NAME);
+        assertThat(testLegalEntity.getPostCode()).isEqualTo(UPDATED_POST_CODE);
+        assertThat(testLegalEntity.getStreetAddress()).isEqualTo(UPDATED_STREET_ADDRESS);
+        assertThat(testLegalEntity.getEmail()).isEqualTo(UPDATED_EMAIL);
+        assertThat(testLegalEntity.getPhone()).isEqualTo(UPDATED_PHONE);
+        assertThat(testLegalEntity.getType()).isEqualTo(UPDATED_TYPE);
     }
 
     @Test

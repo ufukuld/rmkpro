@@ -53,6 +53,14 @@ public class CacheConfiguration {
             createCache(cm, com.teamwill.rmkpro.domain.Make.class.getName());
             createCache(cm, com.teamwill.rmkpro.domain.Vehicle.class.getName());
             createCache(cm, com.teamwill.rmkpro.domain.LegalEntityType.class.getName());
+            createCache(cm, com.teamwill.rmkpro.domain.Person.class.getName());
+            createCache(cm, com.teamwill.rmkpro.domain.Company.class.getName());
+            createCache(cm, com.teamwill.rmkpro.domain.Colour.class.getName());
+            createCache(cm, com.teamwill.rmkpro.domain.Trim.class.getName());
+            createCache(cm, com.teamwill.rmkpro.domain.Vehicle.class.getName() + ".images");
+            createCache(cm, com.teamwill.rmkpro.domain.Vehicle.class.getName() + ".costs");
+            createCache(cm, com.teamwill.rmkpro.domain.Costs.class.getName());
+            createCache(cm, com.teamwill.rmkpro.domain.VehicleImages.class.getName());
             // jhipster-needle-ehcache-add-entry
         };
     }

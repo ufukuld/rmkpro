@@ -126,8 +126,20 @@ public class LegalEntityResource {
             .findById(legalEntity.getId())
             .map(
                 existingLegalEntity -> {
-                    if (legalEntity.getName() != null) {
-                        existingLegalEntity.setName(legalEntity.getName());
+                    if (legalEntity.getPostCode() != null) {
+                        existingLegalEntity.setPostCode(legalEntity.getPostCode());
+                    }
+                    if (legalEntity.getStreetAddress() != null) {
+                        existingLegalEntity.setStreetAddress(legalEntity.getStreetAddress());
+                    }
+                    if (legalEntity.getEmail() != null) {
+                        existingLegalEntity.setEmail(legalEntity.getEmail());
+                    }
+                    if (legalEntity.getPhone() != null) {
+                        existingLegalEntity.setPhone(legalEntity.getPhone());
+                    }
+                    if (legalEntity.getType() != null) {
+                        existingLegalEntity.setType(legalEntity.getType());
                     }
 
                     return existingLegalEntity;

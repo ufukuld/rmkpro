@@ -9,10 +9,12 @@ import { of, Subject } from 'rxjs';
 
 import { VehicleService } from '../service/vehicle.service';
 import { IVehicle, Vehicle } from '../vehicle.model';
-import { IMake } from 'app/entities/make/make.model';
-import { MakeService } from 'app/entities/make/service/make.service';
+import { ITrim } from 'app/entities/trim/trim.model';
+import { TrimService } from 'app/entities/trim/service/trim.service';
 import { ILegalEntity } from 'app/entities/legal-entity/legal-entity.model';
 import { LegalEntityService } from 'app/entities/legal-entity/service/legal-entity.service';
+import { IColour } from 'app/entities/colour/colour.model';
+import { ColourService } from 'app/entities/colour/service/colour.service';
 
 import { VehicleUpdateComponent } from './vehicle-update.component';
 
@@ -22,8 +24,9 @@ describe('Component Tests', () => {
     let fixture: ComponentFixture<VehicleUpdateComponent>;
     let activatedRoute: ActivatedRoute;
     let vehicleService: VehicleService;
-    let makeService: MakeService;
+    let trimService: TrimService;
     let legalEntityService: LegalEntityService;
+    let colourService: ColourService;
 
     beforeEach(() => {
       TestBed.configureTestingModule({
@@ -37,30 +40,31 @@ describe('Component Tests', () => {
       fixture = TestBed.createComponent(VehicleUpdateComponent);
       activatedRoute = TestBed.inject(ActivatedRoute);
       vehicleService = TestBed.inject(VehicleService);
-      makeService = TestBed.inject(MakeService);
+      trimService = TestBed.inject(TrimService);
       legalEntityService = TestBed.inject(LegalEntityService);
+      colourService = TestBed.inject(ColourService);
 
       comp = fixture.componentInstance;
     });
 
     describe('ngOnInit', () => {
-      it('Should call Make query and add missing value', () => {
+      it('Should call Trim query and add missing value', () => {
         const vehicle: IVehicle = { id: 456 };
-        const make: IMake = { id: 53280 };
-        vehicle.make = make;
+        const trim: ITrim = { id: 73818 };
+        vehicle.trim = trim;
 
-        const makeCollection: IMake[] = [{ id: 49995 }];
-        jest.spyOn(makeService, 'query').mockReturnValue(of(new HttpResponse({ body: makeCollection })));
-        const additionalMakes = [make];
-        const expectedCollection: IMake[] = [...additionalMakes, ...makeCollection];
-        jest.spyOn(makeService, 'addMakeToCollectionIfMissing').mockReturnValue(expectedCollection);
+        const trimCollection: ITrim[] = [{ id: 46902 }];
+        jest.spyOn(trimService, 'query').mockReturnValue(of(new HttpResponse({ body: trimCollection })));
+        const additionalTrims = [trim];
+        const expectedCollection: ITrim[] = [...additionalTrims, ...trimCollection];
+        jest.spyOn(trimService, 'addTrimToCollectionIfMissing').mockReturnValue(expectedCollection);
 
         activatedRoute.data = of({ vehicle });
         comp.ngOnInit();
 
-        expect(makeService.query).toHaveBeenCalled();
-        expect(makeService.addMakeToCollectionIfMissing).toHaveBeenCalledWith(makeCollection, ...additionalMakes);
-        expect(comp.makesSharedCollection).toEqual(expectedCollection);
+        expect(trimService.query).toHaveBeenCalled();
+        expect(trimService.addTrimToCollectionIfMissing).toHaveBeenCalledWith(trimCollection, ...additionalTrims);
+        expect(comp.trimsSharedCollection).toEqual(expectedCollection);
       });
 
       it('Should call LegalEntity query and add missing value', () => {
@@ -85,19 +89,41 @@ describe('Component Tests', () => {
         expect(comp.legalEntitiesSharedCollection).toEqual(expectedCollection);
       });
 
+      it('Should call Colour query and add missing value', () => {
+        const vehicle: IVehicle = { id: 456 };
+        const colour: IColour = { id: 72873 };
+        vehicle.colour = colour;
+
+        const colourCollection: IColour[] = [{ id: 9641 }];
+        jest.spyOn(colourService, 'query').mockReturnValue(of(new HttpResponse({ body: colourCollection })));
+        const additionalColours = [colour];
+        const expectedCollection: IColour[] = [...additionalColours, ...colourCollection];
+        jest.spyOn(colourService, 'addColourToCollectionIfMissing').mockReturnValue(expectedCollection);
+
+        activatedRoute.data = of({ vehicle });
+        comp.ngOnInit();
+
+        expect(colourService.query).toHaveBeenCalled();
+        expect(colourService.addColourToCollectionIfMissing).toHaveBeenCalledWith(colourCollection, ...additionalColours);
+        expect(comp.coloursSharedCollection).toEqual(expectedCollection);
+      });
+
       it('Should update editForm', () => {
         const vehicle: IVehicle = { id: 456 };
-        const make: IMake = { id: 12866 };
-        vehicle.make = make;
+        const trim: ITrim = { id: 91782 };
+        vehicle.trim = trim;
         const owner: ILegalEntity = { id: 61910 };
         vehicle.owner = owner;
+        const colour: IColour = { id: 75772 };
+        vehicle.colour = colour;
 
         activatedRoute.data = of({ vehicle });
         comp.ngOnInit();
 
         expect(comp.editForm.value).toEqual(expect.objectContaining(vehicle));
-        expect(comp.makesSharedCollection).toContain(make);
+        expect(comp.trimsSharedCollection).toContain(trim);
         expect(comp.legalEntitiesSharedCollection).toContain(owner);
+        expect(comp.coloursSharedCollection).toContain(colour);
       });
     });
 
@@ -166,10 +192,10 @@ describe('Component Tests', () => {
     });
 
     describe('Tracking relationships identifiers', () => {
-      describe('trackMakeById', () => {
-        it('Should return tracked Make primary key', () => {
+      describe('trackTrimById', () => {
+        it('Should return tracked Trim primary key', () => {
           const entity = { id: 123 };
-          const trackResult = comp.trackMakeById(0, entity);
+          const trackResult = comp.trackTrimById(0, entity);
           expect(trackResult).toEqual(entity.id);
         });
       });
@@ -178,6 +204,14 @@ describe('Component Tests', () => {
         it('Should return tracked LegalEntity primary key', () => {
           const entity = { id: 123 };
           const trackResult = comp.trackLegalEntityById(0, entity);
+          expect(trackResult).toEqual(entity.id);
+        });
+      });
+
+      describe('trackColourById', () => {
+        it('Should return tracked Colour primary key', () => {
+          const entity = { id: 123 };
+          const trackResult = comp.trackColourById(0, entity);
           expect(trackResult).toEqual(entity.id);
         });
       });

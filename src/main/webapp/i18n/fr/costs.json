@@ -1,0 +1,29 @@
+{
+  "rmkproApp": {
+    "costs": {
+      "home": {
+        "title": "Costs",
+        "refreshListLabel": "Actualiser la liste",
+        "createLabel": "Créer un nouveau Costs",
+        "createOrEditLabel": "Créer ou éditer un Costs",
+        "notFound": "Aucun Costs trouvé"
+      },
+      "created": "Un nouveau Costs a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Costs avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Costs avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Etes-vous certain de vouloir supprimer le Costs {{ id }} ?"
+      },
+      "detail": {
+        "title": "Costs"
+      },
+      "id": "ID",
+      "detail": "Detail",
+      "unitPrice": "Unit Price",
+      "vatAmount": "Vat Amount",
+      "vatPercentage": "Vat Percentage",
+      "netAmount": "Net Amount",
+      "vehicle": "Vehicle"
+    }
+  }
+}

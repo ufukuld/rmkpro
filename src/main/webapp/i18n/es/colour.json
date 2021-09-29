@@ -1,0 +1,25 @@
+{
+  "rmkproApp": {
+    "colour": {
+      "home": {
+        "title": "Colours",
+        "refreshListLabel": "Refrescar lista",
+        "createLabel": "Crear nuevo Colour",
+        "createOrEditLabel": "Crear o editar Colour",
+        "notFound": "Ningún Colours encontrado"
+      },
+      "created": "Un nuevo Colour ha sido creado con el identificador {{ param }}",
+      "updated": "Un Colour ha sido actualizado con el identificador {{ param }}",
+      "deleted": "Un Colour ha sido eliminado con el identificador {{ param }}",
+      "delete": {
+        "question": "¿Seguro que quiere eliminar Colour {{ id }}?"
+      },
+      "detail": {
+        "title": "Colour"
+      },
+      "id": "ID",
+      "label": "Label",
+      "paintType": "Paint Type"
+    }
+  }
+}

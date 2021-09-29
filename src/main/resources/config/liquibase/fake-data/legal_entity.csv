@@ -1,4 +1,11 @@
-id;name
-1;Smith
-2;AXA Bank
-
+id;post_code;street_address;email;phone;type
+1;17776-4083;online;Trenton_Feil@hotmail.com;215-269-7765 x2654;CORPORATION
+2;29796;conglomeration Practical;Kaycee.Kautzer82@hotmail.com;411.460.4987 x9733;CORPORATION
+3;77876-4771;holistic;Constantin.Stokes11@hotmail.com;292-540-5527;PRIVATE_INDIVIDUAL
+4;25180-4672;content repurpose Unbranded;Norris.Deckow85@gmail.com;285-633-2065;PRIVATE_INDIVIDUAL
+5;29648-2092;Arizona programming;Breanne82@hotmail.com;399-299-9550 x1289;PRIVATE_INDIVIDUAL
+6;99407-3678;deposit Product;Adolphus32@gmail.com;672.311.2321 x67578;PRIVATE_INDIVIDUAL
+7;53298-4203;Cambridgeshire Cyprus;Gerald_Konopelski91@yahoo.com;(421) 674-4209 x2288;PRIVATE_INDIVIDUAL
+8;03173-8846;Identity;Pamela_Sawayn@hotmail.com;586.295.4847 x3987;PRIVATE_INDIVIDUAL
+9;73366;management convergence;Breanne_Crist@hotmail.com;820.580.1726;CORPORATION
+10;33481-7319;Account Home;Kyra_Barton@gmail.com;(708) 765-9960;PRIVATE_INDIVIDUAL

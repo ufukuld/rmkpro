@@ -33,8 +33,13 @@
       <thead>
         <tr>
           <th scope="col"><span jhiTranslate="global.field.id">ID</span></th>
-          <th scope="col"><span jhiTranslate="rmkproApp.legalEntity.name">Name</span></th>
+          <th scope="col"><span jhiTranslate="rmkproApp.legalEntity.postCode">Post Code</span></th>
+          <th scope="col"><span jhiTranslate="rmkproApp.legalEntity.streetAddress">Street Address</span></th>
+          <th scope="col"><span jhiTranslate="rmkproApp.legalEntity.email">Email</span></th>
+          <th scope="col"><span jhiTranslate="rmkproApp.legalEntity.phone">Phone</span></th>
           <th scope="col"><span jhiTranslate="rmkproApp.legalEntity.type">Type</span></th>
+          <th scope="col"><span jhiTranslate="rmkproApp.legalEntity.person">Person</span></th>
+          <th scope="col"><span jhiTranslate="rmkproApp.legalEntity.company">Company</span></th>
           <th scope="col"></th>
         </tr>
       </thead>
@@ -43,10 +48,19 @@
           <td>
             <a [routerLink]="['/legal-entity', legalEntity.id, 'view']">{{ legalEntity.id }}</a>
           </td>
-          <td>{{ legalEntity.name }}</td>
+          <td>{{ legalEntity.postCode }}</td>
+          <td>{{ legalEntity.streetAddress }}</td>
+          <td>{{ legalEntity.email }}</td>
+          <td>{{ legalEntity.phone }}</td>
+          <td jhiTranslate="{{ 'rmkproApp.LegalEntityType.' + legalEntity.type }}">{{ legalEntity.type }}</td>
           <td>
-            <div *ngIf="legalEntity.type">
-              <a [routerLink]="['/legal-entity-type', legalEntity.type?.id, 'view']">{{ legalEntity.type?.id }}</a>
+            <div *ngIf="legalEntity.person">
+              <a [routerLink]="['/person', legalEntity.person?.id, 'view']">{{ legalEntity.person?.id }}</a>
+            </div>
+          </td>
+          <td>
+            <div *ngIf="legalEntity.company">
+              <a [routerLink]="['/company', legalEntity.company?.id, 'view']">{{ legalEntity.company?.id }}</a>
             </div>
           </td>
           <td class="text-right">

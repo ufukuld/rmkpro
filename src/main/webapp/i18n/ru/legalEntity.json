@@ -18,8 +18,13 @@
         "title": "Legal Entity"
       },
       "id": "ID",
-      "name": "Name",
-      "type": "Type"
+      "postCode": "Post Code",
+      "streetAddress": "Street Address",
+      "email": "Email",
+      "phone": "Phone",
+      "type": "Type",
+      "person": "Person",
+      "company": "Company"
     }
   }
 }

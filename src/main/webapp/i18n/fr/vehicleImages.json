@@ -1,0 +1,26 @@
+{
+  "rmkproApp": {
+    "vehicleImages": {
+      "home": {
+        "title": "VehicleImages",
+        "refreshListLabel": "Actualiser la liste",
+        "createLabel": "Créer un nouveau Vehicle Images",
+        "createOrEditLabel": "Créer ou éditer un Vehicle Images",
+        "notFound": "Aucun Vehicle Images trouvé"
+      },
+      "created": "Un nouveau Vehicle Images a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Vehicle Images avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Vehicle Images avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Etes-vous certain de vouloir supprimer le Vehicle Images {{ id }} ?"
+      },
+      "detail": {
+        "title": "Vehicle Images"
+      },
+      "id": "ID",
+      "contentType": "Content Type",
+      "image": "Image",
+      "vehicle": "Vehicle"
+    }
+  }
+}

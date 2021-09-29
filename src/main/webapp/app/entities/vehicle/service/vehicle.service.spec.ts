@@ -3,6 +3,7 @@ import { HttpClientTestingModule, HttpTestingController } from '@angular/common/
 import * as dayjs from 'dayjs';
 
 import { DATE_FORMAT } from 'app/config/input.constants';
+import { VehicleStatus } from 'app/entities/enumerations/vehicle-status.model';
 import { IVehicle, Vehicle } from '../vehicle.model';
 
 import { VehicleService } from './vehicle.service';
@@ -28,6 +29,11 @@ describe('Service Tests', () => {
         id: 0,
         registrationNumber: 'AAAAAAA',
         firstRegistrationDate: currentDate,
+        status: VehicleStatus.REQ_FOR_COLLECTION,
+        mileage: 0,
+        reservePrice: 0,
+        proposedSalePrice: 0,
+        netBookValue: 0,
       };
     });
 
@@ -76,6 +82,11 @@ describe('Service Tests', () => {
             id: 1,
             registrationNumber: 'BBBBBB',
             firstRegistrationDate: currentDate.format(DATE_FORMAT),
+            status: 'BBBBBB',
+            mileage: 1,
+            reservePrice: 1,
+            proposedSalePrice: 1,
+            netBookValue: 1,
           },
           elemDefault
         );
@@ -99,6 +110,7 @@ describe('Service Tests', () => {
           {
             registrationNumber: 'BBBBBB',
             firstRegistrationDate: currentDate.format(DATE_FORMAT),
+            proposedSalePrice: 1,
           },
           new Vehicle()
         );
@@ -125,6 +137,11 @@ describe('Service Tests', () => {
             id: 1,
             registrationNumber: 'BBBBBB',
             firstRegistrationDate: currentDate.format(DATE_FORMAT),
+            status: 'BBBBBB',
+            mileage: 1,
+            reservePrice: 1,
+            proposedSalePrice: 1,
+            netBookValue: 1,
           },
           elemDefault
         );
@@ -181,7 +198,7 @@ describe('Service Tests', () => {
         });
 
         it('should add only unique Vehicle to an array', () => {
-          const vehicleArray: IVehicle[] = [{ id: 123 }, { id: 456 }, { id: 36460 }];
+          const vehicleArray: IVehicle[] = [{ id: 123 }, { id: 456 }, { id: 72006 }];
           const vehicleCollection: IVehicle[] = [{ id: 123 }];
           expectedResult = service.addVehicleToCollectionIfMissing(vehicleCollection, ...vehicleArray);
           expect(expectedResult).toHaveLength(3);

@@ -22,16 +22,42 @@
         <dd>
           <span>{{ vehicle.firstRegistrationDate | formatMediumDate }}</span>
         </dd>
-        <dt><span jhiTranslate="rmkproApp.vehicle.make">Make</span></dt>
+        <dt><span jhiTranslate="rmkproApp.vehicle.status">Status</span></dt>
         <dd>
-          <div *ngIf="vehicle.make">
-            <a [routerLink]="['/make', vehicle.make?.id, 'view']">{{ vehicle.make?.id }}</a>
+          <span jhiTranslate="{{ 'rmkproApp.VehicleStatus.' + vehicle.status }}">{{ vehicle.status }}</span>
+        </dd>
+        <dt><span jhiTranslate="rmkproApp.vehicle.mileage">Mileage</span></dt>
+        <dd>
+          <span>{{ vehicle.mileage }}</span>
+        </dd>
+        <dt><span jhiTranslate="rmkproApp.vehicle.reservePrice">Reserve Price</span></dt>
+        <dd>
+          <span>{{ vehicle.reservePrice }}</span>
+        </dd>
+        <dt><span jhiTranslate="rmkproApp.vehicle.proposedSalePrice">Proposed Sale Price</span></dt>
+        <dd>
+          <span>{{ vehicle.proposedSalePrice }}</span>
+        </dd>
+        <dt><span jhiTranslate="rmkproApp.vehicle.netBookValue">Net Book Value</span></dt>
+        <dd>
+          <span>{{ vehicle.netBookValue }}</span>
+        </dd>
+        <dt><span jhiTranslate="rmkproApp.vehicle.trim">Trim</span></dt>
+        <dd>
+          <div *ngIf="vehicle.trim">
+            <a [routerLink]="['/trim', vehicle.trim?.id, 'view']">{{ vehicle.trim?.id }}</a>
           </div>
         </dd>
         <dt><span jhiTranslate="rmkproApp.vehicle.owner">Owner</span></dt>
         <dd>
           <div *ngIf="vehicle.owner">
             <a [routerLink]="['/legal-entity', vehicle.owner?.id, 'view']">{{ vehicle.owner?.id }}</a>
+          </div>
+        </dd>
+        <dt><span jhiTranslate="rmkproApp.vehicle.colour">Colour</span></dt>
+        <dd>
+          <div *ngIf="vehicle.colour">
+            <a [routerLink]="['/colour', vehicle.colour?.id, 'view']">{{ vehicle.colour?.id }}</a>
           </div>
         </dd>
       </dl>

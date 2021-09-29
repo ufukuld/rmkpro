@@ -1,0 +1,10 @@
+id;label;doors;seats;engine_displacement_cc;is_automatic;fuel_type;model_id
+1;1.5 Elite CVT;5;5;1500;true;PETROL_HYBRID;1
+2;1.5 ES;5;5;1500;false;ELECTRIC;1
+3;1.2;5;4;1200;false;PETROL_HYBRID;2
+4;1.6;5;4;1600;true;PETROL;2
+5;2.0 ES;4;5;2000;false;PETROL_HYBRID;3
+6;3.0 V6;4;5;3000;true;DIESEL;3
+7;1.6i;4;4;1600;false;PETROL;4
+8;1.8d;4;4;1800;false;DIESEL;4
+9;2.0;5;5;2000;true;PETROL;5
